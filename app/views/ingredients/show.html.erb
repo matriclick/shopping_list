@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ingredient.name %>
+</p>
+
+<p>
+  <b>Measure:</b>
+  <%= @ingredient.measure.name %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency @ingredient.price, :precision => 0 %>
+cada <%= @ingredient.quantity_for_price %> <%= @ingredient.measure.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ingredient.description %>
+</p>
+
+<% if @user.admin? %>
+	<%= link_to 'Volver a la receta', :back %> |
+	<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
+	<%= link_to 'Back', ingredients_path %>
+<% else %>
+	<%= link_to 'Volver a la receta', :back %>
+<% end %>

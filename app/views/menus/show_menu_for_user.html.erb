@@ -1,0 +1,23 @@
+<h1>Menú</h1>
+<p id="notice"><%= notice %></p>
+<p>
+  <h2>Recetas:</h2>
+  <% @menu.recipes.each_with_index do |r, i| %>
+	- <%= @menu.start_date + i.days %> - <%= link_to r.name, r %><br />
+  <% end %>
+</p>
+
+<p>
+  <b>Fecha inicio:</b>
+  <%= @menu.start_date %>
+</p>
+
+<p>
+  <b>Fecha fin:</b>
+  <%= @menu.end_date %>
+</p>
+
+<p>
+  <h2>Lista de compras</h2>
+  <%= @menu.shopping_list %>
+</p>

@@ -1,0 +1,61 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#nav').localScroll(800);
+	//.parallax(xPosition, speedFactor, outerHeight) options:
+	//xPosition - Horizontal position of the element
+	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+	//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+	$('#intro').parallax("50%", 0.2);
+	$('#second').parallax("50%", 0.2);
+	$('.bg').parallax("20%", 0.4);
+	$('#third').parallax("50%", 0.3);
+
+})
+</script>
+
+<div id="intro">
+	<div class="story">
+    	<div class="float-left">
+		<h1>Tu Lista de Compras</h1>
+        <p>Come bien. Come lo que te gusta. Te pasamos las recetas y la lista para que compres los ingredientes.</p>
+        </div>
+    </div>
+
+	<div class="story" style="margin-top:100px">
+    	<div class="float-right right">
+            <h2>¿Qué es MyGrocery Checklist?</h2>
+            <p>En MyGrocery Checklist te ayuda a vivir un estilo de vida saludable y rico, entregándote todas las semanas distintas ideas de comidas para que cocines en tu hogar.</p>
+            <p>Te enviamos la lista de las compras que deberías hacer en el supermercado, junto con el precio de referencia de cada ingrediente.</p>
+			<p>Continúa bajando para que revisemos juntos cómo funciona</p>
+        </div>
+    </div>
+
+</div>
+
+<div id="second"><div class="bg"></div>
+	<div class="story">
+    	<div class="float-right right">
+            <h2>Paso 1</h2>
+            <p>Según tu estilo de vida, selecciona tus preferencias.</p>
+            <p>También personaliza algunas cosas como "comidas que no te gustan", "alergias" u otras cosas que sean importante saber al momento de crear tu lista de comidas para la semana.</p>
+        </div>
+    </div> <!--.story-->
+
+	<div class="story" style="margin-top:500px;">
+    	<div class="float-left">
+        	<h2>Paso 2 - ¡Comemos sano y rico!</h2>
+            <p>Una vez hayas completado tus preferencias, automáticamente se generará una lista de comidas para la semana siguiente (de lunes a domingo), todas las semanas recibirás una lista distinta en tu correo, el día que tu hayas seleccionado.</p>
+            <p>Podrás editar en cualquier mínuto la lista de comidas, agregando o quitando las que no te parezcan, y podrás pedir que se te envíe nuevamente la lista de compras al correo o imprimirla para que la lleves al supermercado.</p>
+        </div>
+    </div> <!--.story-->
+    
+</div> <!--#second-->
+
+<div id="third">
+	<div class="story">
+    	<div class="float-left">
+        	<h2>Paso 3 - ¡A comprar y cocinar!</h2>
+            <p>En cualquier momento puedes personalizar los menu's que armamos o cambiar tus preferencias.</p>
+        </div>
+    </div> <!--.story-->
+</div> <!--#third-->

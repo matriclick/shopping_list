@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @recipe.name %>
+</p>
+
+<p>
+  <b>Ingredientes:</b>
+  <% @recipe.recipe_ingredients.each do |ri| %>
+	- <%= link_to ri.ingredient.name, ri.ingredient %> <%= ri.quantity %> <%= ri.ingredient.measure.name %><br />
+  <% end %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <% @recipe.tags.each do |tag| %>
+	- <%= tag.name %><br />
+  <% end %>
+</p>
+
+<p>
+  <b>Dificulty:</b>
+  <%= @recipe.dificulty %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @recipe.description %>
+</p>
+
+<% if @user.admin? %>
+	<%= link_to 'Volver al menú', show_menu_for_user_path %> | 
+	<%= link_to 'Edit', edit_recipe_path(@recipe) %> | 
+	<%= link_to 'Back', recipes_path %>
+<% else %>
+	<%= link_to 'Volver al menú', :back %>
+<% end %>

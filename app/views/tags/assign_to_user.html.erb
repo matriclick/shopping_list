@@ -1,0 +1,18 @@
+<h1>Selecciona los estilos que mejor reflejen el tuyo actual</h1>
+<p>Esta información la utilizaremos para armar los menús que mejor calcen con lo que te gusta y el estilo de vida que tienes o quieres lelvar.</p>
+
+<%= form_for(@user, :url => update_tags_for_user_path(:id => @user.id), :method => :put) do |f| %>
+	<% @tags.each do |tag| %>
+		<div style="float:left; margin:10px; background:#f6f6f6">
+			<%= image_tag('tags/'+tag.image_name, width: '180px', height: '180px') %><br />
+			<p style="text-align:center;">
+				<%= check_box_tag("user[tag_ids][]", tag.id, (@user.tags.include? tag), 
+					:class => "tag_#{tag.id}") %> <%= tag.name.capitalize %>
+			</p>
+		</div>
+	<% end %>
+	<div class="clear"></div>
+	<div style="margin-top:25px">
+		  <%= f.submit 'Actualizar' %>
+	</div>
+<% end %>

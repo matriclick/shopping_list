@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Start date:</b>
+  <%= @menu.start_date %>
+  <b>End date:</b>
+  <%= @menu.end_date %>
+</p>
+
+<p>
+  <b>Recetas:</b>
+  <% @menu.recipes.each do |r| %>
+	- <%= link_to r.name, r %><br />
+  <% end %>
+</p>
+
+<p>
+  <b>Shopping list:</b>
+  <%= @menu.shopping_list %>
+</p>
+
+
+<%= link_to 'Edit', edit_menu_path(@menu) %> |
+<%= link_to 'Back', menus_path %>

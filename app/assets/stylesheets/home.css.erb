@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+/* CONTENT */
+.container {
+	background: url(<%= asset_path 'backgrounds/bg-img1.jpg' %>) no-repeat fixed;
+	background-size:100% 100%;
+	margin: 0 auto;
+	padding: 0;
+	min-height:600px;
+}
+.content {
+	width:900px;
+	padding:10px 0 43px;
+	background:url(<%= asset_path 'backgrounds/content-tail.png' %>) left top repeat;
+	position:relative;
+	z-index:1;
+    margin:0 auto;
+}
+.footer_content {
+	width:900px;
+	position:relative;
+	z-index:1;
+    margin:0 auto;
+}
+
+.story .float-left {
+	margin: 0px 0px 20px 0px;
+	padding: 20px;
+	position: relative;
+	width: 350px;
+	background:url(<%= asset_path 'backgrounds/content-tail.png' %>) left top repeat;
+}
+
+.story .float-right {
+	margin: 50px 0px 20px 20px;
+	padding: 20px;
+	position: relative;
+	width: 550px;
+	background:url(<%= asset_path 'backgrounds/content-tail.png' %>) left top repeat;
+}
+
+#intro{
+	background: url(<%= asset_path 'landing_page/firstBG.jpg' %>) no-repeat fixed;
+	background-size:100% 100%;
+	height: 800px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#second{
+	background: url(<%= asset_path 'landing_page/secondBG.jpg' %>) no-repeat fixed;
+	background-size:100% 100%;
+	height: 900px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0;
+}
+
+#second .bg{
+	background: url(<%= asset_path 'landing_page/trainers.png' %>) 50% 0 no-repeat fixed;
+	height: 900px;
+	margin: 0 auto;
+	padding: 0;
+	position: absolute;
+	width: 900px;
+	z-index: 200;
+}
+
+#third{
+	background: url(<%= asset_path 'landing_page/thirdBG.jpg' %>) no-repeat fixed;
+	background-size:100% 100%;
+	height: 650px;
+	padding: 100px 0 0 0;	
+}
+
+#fifth{
+	background: #ccc;
+	height: 400px;
+	margin: 0 auto;
+	padding: 40px 0 0 0;
+}
+

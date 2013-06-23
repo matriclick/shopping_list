@@ -1,0 +1,4 @@
+<h2>Tu lista de compras</h2>
+<b>Fecha Inicio</b> <%= @menu.start_date %> - <b>Fecha Fin</b> <%= @menu.end_date %>
+<br /><br />
+<%= raw @menu.shopping_list.gsub('\n', '<br />') %>

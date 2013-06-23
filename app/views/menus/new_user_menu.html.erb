@@ -1,0 +1,39 @@
+<h1>Nuevo Menú</h1>
+<%= form_for(@menu, :url => create_menu_for_user_path(:id => @user.id), :method => :post) do |f| %>
+	<% if @menu.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
+
+	    <ul>
+	    <% @menu.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	
+	<div class="field">
+	  <%= f.label :start_date, 'Fecha de la primera comida' %><br />
+	  <%= f.datetime_select :start_date %>
+	</div>
+	<div class="field">
+	  <%= f.label :end_date, 'Fecha de la última comida' %><br />
+	  <%= f.datetime_select :end_date %>
+	</div>
+	
+	<div class="field">
+		<div>Las preferencias para realizar el menú serán:</div>
+		<% @user.tags.each do |tag| %>
+			<div style="float:left; margin:10px; background:#f6f6f6">
+				<%= image_tag('tags/'+tag.image_name, width: '180px', height: '180px') %><br />
+				<p style="text-align:center;">
+					<%= tag.name.capitalize %>
+				</p>
+			</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+	 <div class="actions">
+	    <%= f.submit 'Crear Menú' %>
+	  </div>
+<% end %>

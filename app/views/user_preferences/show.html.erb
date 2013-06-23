@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_preference.user_id %>
+</p>
+
+<p>
+  <b>Day to send email:</b>
+  <%= @user_preference.day_to_send_email %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_preference_path(@user_preference) %> |
+<%= link_to 'Back', user_preferences_path %>

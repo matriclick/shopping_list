@@ -1,0 +1,32 @@
+<h1>Listing recipes</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Ingredientes</th>
+    <th>Nivel de dificultad</th>
+    <th></th>
+  </tr>
+
+<% @recipes.each do |recipe| %>
+  <tr>
+    <td><%= recipe.name %></td>
+    <td>
+		<% recipe.recipe_ingredients.each do |ri| %>
+			- <%= ri.ingredient.name %><br />
+		<% end %>
+	</td>
+    <td><%= recipe.dificulty %></td>
+    <td><%= recipe.dificulty_reason %></td>
+    <td><%= link_to 'Ver instrucciones', recipe %></td>
+	<% if @user.admin? %>
+    	<td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+    	<td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recipe', new_recipe_path %> | <%= link_to 'Administrador', home_administrator_home_path %>

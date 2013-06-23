@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @measure.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @measure.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_measure_path(@measure) %> |
+<%= link_to 'Back', measures_path %>

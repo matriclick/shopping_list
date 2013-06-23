@@ -1,0 +1,9 @@
+<h1>Tu Lista de Supermercado</h1>
+<%= link_to 'Enviar lista a mi correo', send_shopping_list_path %> | 
+<%= link_to 'Imprimir', '#', onclick:"printDiv('shopping_list')" %>
+<div id="shopping_list">
+	<h3>Detalle de la lista</h3>
+	<%= raw @shopping_list.gsub('\n', '<br />') %>
+</div>
+<br /><br />
+<%= link_to 'Volver al incio', home_user_home_path %>

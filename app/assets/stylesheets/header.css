@@ -1,0 +1,21 @@
+.header {
+	font:20px "PT Sans", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	letter-spacing: 1px;
+	width:100%;
+	margin:0px 0 0px 0;
+	border-top:1px solid #e0e2e5;
+	padding-bottom:5px;
+	background-color:white;
+}
+.header_content {
+	width:900px;
+	margin:10px auto;
+}
+
+.header a {
+	text-decoration:none;
+}
+.user_nav {
+
+}

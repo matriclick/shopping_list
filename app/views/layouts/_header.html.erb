@@ -1,0 +1,16 @@
+<div class="header">
+	<div class="header_content">
+		<div class="left">
+			<%= link_to image_tag('logo/logo.jpg'), home_user_home_path %>
+		</div>
+		<div class="user_nav right">
+		  <% if user_signed_in? %>
+		    Signed in as <%= current_user.email %>. Not you?
+		    <%= link_to "Salir", destroy_user_session_path, :method => :delete %>
+		  <% else %>
+		    <%= link_to "Entrar", new_user_session_path %> | <%= link_to "Registrarse", new_user_registration_path %>
+		  <% end %>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>

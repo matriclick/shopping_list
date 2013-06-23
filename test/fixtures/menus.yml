@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_date: 2013-06-21 11:27:00
+  end_date: 2013-06-21 11:27:00
+  shopping_list: MyText
+
+two:
+  start_date: 2013-06-21 11:27:00
+  end_date: 2013-06-21 11:27:00
+  shopping_list: MyText

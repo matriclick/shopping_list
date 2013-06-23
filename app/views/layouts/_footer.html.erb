@@ -1,0 +1,55 @@
+<div class="footer">
+	<div class="footer_content">
+		<div class="footer_box left">
+			<ul class="footer_links">
+				<li class="footer_title">SÍGUENOS</li>
+				<li><%= link_to image_tag('footer/social-black-facebook.jpg'), 'https://www.facebook.com/tramantaonline', 
+						:target => '_blank' %> 
+					<%= link_to image_tag('footer/social-black-twitter.jpg'), 'https://twitter.com/tramantaonline', 
+							:target => '_blank' %>
+				</li>
+				<li><%= link_to image_tag('footer/social-black-pinterest.jpg'), 'http://pinterest.com/tramanta', 
+					:target => '_blank' %></li>
+			</ul>
+		</div>
+
+		<div class="footer_box left">
+			<ul class="footer_links">
+				<li class="footer_title">MI CUENTA</li>
+				<li><%= link_to 'Menú actual', show_menu_for_user_path %></li>
+				<li><%= link_to 'Mis preferencias', tags_assign_to_user_path %></li>
+				<li><%= link_to 'Lista de compras', show_shopping_list_path %></li>
+				<li><%= link_to 'Nuevo menú', new_user_menu_path %></li>
+				<li><%= link_to 'Recetas', recipes_path %></li>
+			</ul>
+		</div>
+		
+		<div class="footer_box left">
+			<ul class="footer_links">
+				<li class="footer_title">INFO</li>
+				<li><%= link_to 'Suscribirse', '#', :class => 'subscription_popup' %></li>
+				<li><%= link_to 'Prensa', '#' %></li>
+				<li><%= link_to 'Quiénes somos', '#' %></li>
+				<li><%= link_to 'Trabaja en Tramanta', '#' %></li>
+			</ul>	
+		</div>
+	
+		<div class="footer_box left">
+			<ul class="footer_links">
+				<li class="footer_title">AYUDA</li>
+				<li><%= link_to 'Preguntas frecuentes', '#' %></li>
+				<li><%= link_to 'Términos de uso', '#' %></li>
+				<li><%= link_to 'Contacto empresas', '#' %></li>
+				<li><%= link_to 'Contacto y feedback', '#' %></li>
+			</ul>	
+		</div>
+		
+		<div class="footer_box left">
+			<ul class="footer_links">
+				<li class="footer_title">ADMINISTRAR</li>
+				<li><%= link_to 'Administrador', home_administrator_home_path %></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

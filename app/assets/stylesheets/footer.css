@@ -1,0 +1,33 @@
+.footer {
+	font:20px "PT Sans", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	letter-spacing: 1px;
+	width:100%;
+	margin:0px 0 0px 0;
+	border-top:1px solid #e0e2e5;
+	padding-bottom:30px;
+	background-color:white;
+}
+.footer a {
+	text-decoration:none;
+}
+.footer_title {
+	font-size: 12px;
+}
+.footer_box {
+	color:#444;
+}
+ul.footer_links {
+	line-height:18px;
+	margin:0px;
+	padding:15px 20px;
+}
+ul.footer_links li {
+	font-size:11px;
+	color:#BEBEBE;
+}
+ul.footer_links li.footer_title {
+	font-size:12px;
+	font-weight: bold;
+	color:#444;
+}
