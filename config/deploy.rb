@@ -9,6 +9,8 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 require "rvm/capistrano"
 
+set :rvm_bin_path, "/home/ubuntu/.rvm/bin"
+
 default_run_options[:pty] = true
 set :shared_assets, %w{vendor/webpay} # Add custom symlinks directories here (separated by space). This is used for unversioned directories in the git repository. Example: %w{public/custom1 public/custom2 vendor/custom3}
 set :application, "shopping_list"
@@ -17,14 +19,15 @@ ssh_options[:forward_agent] = true
 set :user, "ubuntu"
 set :use_sudo, false
 set :deploy_to, "/home/#{user}/apps/#{application}"
-    
+
+
 task :production do
   set :scm_passphrase, "holagorda1"
   set :application, "shopping_list"
   server "ec2-184-72-214-80.compute-1.amazonaws.com", :app, :web, :db, :primary => true
   set :repository,  "git@github.com:matriclick/shopping_list.git"
   set :scm, "git"
-  set :deploy_via, :copy
+  set :deploy_via, :remote_cache
   set :branch, "master"
   set :user, "ubuntu"
   set :use_sudo, false
