@@ -67,8 +67,4 @@ ShoppingCart::Application.configure do
   config.action_mailer.default_url_options = { :host => "ec2-67-202-0-183.compute-1.amazonaws.com" }
   config.action_mailer.asset_host = "ec2-67-202-0-183.compute-1.amazonaws.com"
   
-  config.middleware.use ExceptionNotifier,
-    email_prefix: "[Error] ",
-    sender_address: "hhanckes@gmail.com",
-    exception_recipients: "hhanckes@gmail.com"
 end
