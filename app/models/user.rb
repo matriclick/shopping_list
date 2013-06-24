@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  before_save :create_user_preference
+  before_create :create_user_preference
   
   has_many :menus
   has_one :user_preference

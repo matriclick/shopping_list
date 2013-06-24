@@ -8,3 +8,25 @@ aux << (Tag.find_by_name("Balanceado") || Tag.create(:name => 'Balanceado', :ima
 aux << (Tag.find_by_name("Bajas Calorías") || Tag.create(:name => 'Bajas Calorías', :image_name => "bajas-calorias.jpg"))
 aux.each { |x| puts x.name}
 puts "\n"
+
+puts "--> Measures:"
+aux = []
+aux << (Measure.find_by_name("Kilogramos") || Measure.create(:name => 'Kilogramos'))
+aux << (Measure.find_by_name("Gramos") || Measure.create(:name => 'Gramos'))
+aux << (Measure.find_by_name("Unidad") || Measure.create(:name => 'Unidad'))
+aux << (Measure.find_by_name("Litros") || Measure.create(:name => 'Litros'))
+aux.each { |x| puts x.name}
+puts "\n"
+
+puts "--> Ingredients:"
+aux = []
+aux << (Ingredient.find_by_name("Naranja") || Ingredient.create(:name => 'Naranja', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Manzana") || Ingredient.create(:name => 'Manzana', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Palta") || Ingredient.create(:name => 'Palta', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Tomate") || Ingredient.create(:name => 'Tomate', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Lechuga") || Ingredient.create(:name => 'Lechuga', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Filete") || Ingredient.create(:name => 'Filete', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Hamburguesa") || Ingredient.create(:name => 'Hamburguesa', :price => 1000, :quantity_for_price => 1))
+aux << (Ingredient.find_by_name("Arroz") || Ingredient.create(:name => 'Arroz', :price => 1000, :quantity_for_price => 1))
+aux.each { |x| puts x.name}
+puts "\n"
