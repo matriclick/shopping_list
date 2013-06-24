@@ -1,33 +1,18 @@
 require 'bundler/capistrano'
 
-set :rvm_ruby_string, :local               # use the same ruby as used locally for deployment
-set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
-
-before 'deploy:setup', 'rvm:install_rvm'   # install RVM
-before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, OR:
-before 'deploy:setup', 'rvm:create_gemset' # only create gemset
-
-require "rvm/capistrano"
-
-set :rvm_bin_path, "/home/ubuntu/.rvm/bin"
-
 default_run_options[:pty] = true
-set :shared_assets, %w{vendor/webpay} # Add custom symlinks directories here (separated by space). This is used for unversioned directories in the git repository. Example: %w{public/custom1 public/custom2 vendor/custom3}
 set :application, "shopping_list"
-server "ec2-184-72-214-80.compute-1.amazonaws.com", :app, :web, :db, :primary => true
-ssh_options[:forward_agent] = true
-set :user, "ubuntu"
-set :use_sudo, false
-set :deploy_to, "/home/#{user}/apps/#{application}"
-
+role :app, 'ec2-67-202-0-183.compute-1.amazonaws.com'
+role :web, 'ec2-67-202-0-183.compute-1.amazonaws.com'
+set :user, 'ubuntu'
 
 task :production do
   set :scm_passphrase, "holagorda1"
   set :application, "shopping_list"
-  server "ec2-184-72-214-80.compute-1.amazonaws.com", :app, :web, :db, :primary => true
+  server "ec2-67-202-0-183.compute-1.amazonaws.com", :app, :web, :db, :primary => true
   set :repository,  "git@github.com:matriclick/shopping_list.git"
   set :scm, "git"
-  set :deploy_via, :remote_cache
+  set :deploy_via, :copy
   set :branch, "master"
   set :user, "ubuntu"
   set :use_sudo, false
@@ -36,6 +21,8 @@ task :production do
   set :deploy_to, "/home/#{user}/apps/#{application}"
   set :database_name, "#{application}"
 end
+
+ssh_options[:forward_agent] = true
 
 namespace :deploy do
   task :start do ; end
@@ -92,11 +79,11 @@ after "db:db_config", "rvm:trust_rvmrc"
 after "rvm:trust_rvmrc", "db:run_migration"
 before "deploy:symlink", "deploy:cleanup"
 
-before "deploy:setup" do
-  assets.symlinks.setup
-end
+#before "deploy:setup" do
+#  assets.symlinks.setup
+#end
 
-before "deploy:symlink" do
-  assets.symlinks.update
-end
+#before "deploy:symlink" do
+#  assets.symlinks.update
+#end
 
