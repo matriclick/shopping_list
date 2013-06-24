@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'devise'
-gem 'nested_form'
+gem 'nested_form', :git => "https://github.com/fxposter/nested_form.git"
 gem "friendly_id"
 gem 'rails-i18n'
 gem 'rvm-capistrano'

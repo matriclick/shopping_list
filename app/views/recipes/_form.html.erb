@@ -17,7 +17,8 @@
   </div>
 	
   <%= render 'recipe_ingredient_fields', :f => f %>
-	
+  <p><%= f.link_to_add "Agregar Ingrediente", :recipe_ingredients %></p>	
+
   <div class="field">
 	<%= f.label :tag, 'Tags' %>
 	<% Tag.all.each do |tag| %>
