@@ -1,7 +1,6 @@
 ShoppingCart::Application.routes.draw do
   resources :user_preferences
 
-
   resources :menus
   get "new_user_menu" => 'menus#new_user_menu', :as => 'new_user_menu'
   post "create_menu_for_user" => "menus#create_menu_for_user", :as => 'create_menu_for_user'

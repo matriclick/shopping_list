@@ -1,14 +1,15 @@
 <h1>¡Bienvenido! <%= @user.email %></h1>
-<hr>
-<h2>Menú Actual</h2>
-<%= link_to 'Ver lista de compra', show_shopping_list_path %> | <%= link_to 'Editar Menu', edit_menu_path(@menu) %>
+<% unless @menu.nil %>
+	<h2>Menú Actual</h2>
+	<%= link_to 'Ver lista de compra', show_shopping_list_path %> | <%= link_to 'Editar Menu', edit_menu_path(@menu) %>
 
-<p>
-  <% @menu.recipes.each_with_index do |r, i| %>
-	- <%= link_to r.name, r %> - <%= l (@menu.start_date + i.days) %><br />
-  <% end %>
-</p>
-<hr>
+	<p>
+	  <% @menu.recipes.each_with_index do |r, i| %>
+		- <%= link_to r.name, r %> - <%= l (@menu.start_date + i.days) %><br />
+	  <% end %>
+	</p>
+<% end %>
+
 <h2>Tus estilos:</h2>
 <%= link_to 'Editar estilos', tags_assign_to_user_path %>
 <div class="clear"></div>
@@ -21,7 +22,7 @@
 	</div>
 <% end %>
 <div class="clear"></div>
-<hr>
+
 <h2>Tus preferencias:</h2>
 <%= link_to 'Editar preferecias', edit_user_preference_path(@user.user_preference) %>
 <p>Día en el que se enviará la lista de compras: <b><%= t Date::DAYNAMES[@user.user_preference.day_to_send_email] %></b></p>
