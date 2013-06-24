@@ -1,4 +1,4 @@
-ShoppingCart::Application.configure do
+Matri::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -20,12 +20,9 @@ ShoppingCart::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  # Defaults to nil and saved in location specified by config.assets.prefix
-  # config.assets.manifest = YOUR_PATH
-
   # Specifies the header that your server uses for sending files
-  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  # (comment out if your front-end server doesn't support this)
+  config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # Use 'X-Accel-Redirect' for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -33,11 +30,8 @@ ShoppingCart::Application.configure do
   # See everything in the log (default is :info)
   # config.log_level = :debug
 
-  # Prepend all log lines with the following tags
-  # config.log_tags = [ :subdomain, :uuid ]
-
   # Use a different logger for distributed setups
-  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -60,10 +54,21 @@ ShoppingCart::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  config.action_mailer.default_url_options = { :host => '184.72.214.80' }
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "hhanckes@gmail.com",
+    :password             => "lasgaviotas",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+  
+  config.action_mailer.default_url_options = { :host => "ec2-67-202-0-183.compute-1.amazonaws.com" }
+  config.action_mailer.asset_host = "ec2-67-202-0-183.compute-1.amazonaws.com"
+  
+  config.middleware.use ExceptionNotifier,
+    email_prefix: "[Error] ",
+    sender_address: "hhanckes@gmail.com",
+    exception_recipients: "hhanckes@gmail.com"
 end

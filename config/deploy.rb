@@ -6,6 +6,7 @@ set :application, "shopping_list"
 role :app, 'ec2-67-202-0-183.compute-1.amazonaws.com'
 role :web, 'ec2-67-202-0-183.compute-1.amazonaws.com'
 set :user, 'ubuntu'
+set :normalize_asset_timestamps, false
 
 task :production do
   set :scm_passphrase, "holagorda1"
@@ -13,7 +14,7 @@ task :production do
   server "ec2-67-202-0-183.compute-1.amazonaws.com", :app, :web, :db, :primary => true
   set :repository,  "git@github.com:matriclick/shopping_list.git"
   set :scm, "git"
-  set :deploy_via, :copy
+  set :deploy_via, :remote_cache
   set :branch, "master"
   set :user, "ubuntu"
   set :use_sudo, false
@@ -35,7 +36,7 @@ end
 
 namespace :db do  
   task :db_config, :except => { :no_release => true }, :role => :app do  
-    run "cp -f /home/#{user}/apps/#{application}/shared/database.yml #{release_path}/config/database.yml" 
+#    run "cp -f /home/#{user}/apps/#{application}/shared/database.yml #{release_path}/config/database.yml" 
     run "cd #{release_path} && rake RAILS_ENV=production db:create" 
   end 
   
@@ -50,6 +51,11 @@ namespace :rvm do
     run "rvm rvmrc trust #{release_path}"
   end
 end
+
+task :create_log_share do
+  run "mkdir -p #{shared_path}/log"
+end
+before 'deploy:update', :create_log_share
 
 #namespace :sitemap do
 #  task :refresh_sitemaps do
