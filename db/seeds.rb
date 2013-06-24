@@ -1,6 +1,6 @@
 # coding: utf-8
 
-puts "--> Dress Types:"
+puts "--> Tag:"
 aux = []
 aux << (Tag.find_by_name("Deportista") || Tag.create(:name => 'Deportista', :image_name => "deportista.jpg"))
 aux << (Tag.find_by_name("Vegetariano") || Tag.create(:name => 'Vegetariano', :image_name => "vegetariano.jpg"))
