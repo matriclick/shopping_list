@@ -8,9 +8,10 @@ gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'devise'
-gem 'nested_form', :git => "https://github.com/fxposter/nested_form.git"
+gem 'nested_form'
 gem "friendly_id"
 gem 'rails-i18n'
+gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,7 +37,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
