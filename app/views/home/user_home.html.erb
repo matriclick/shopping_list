@@ -1,5 +1,5 @@
 <h1>¡Bienvenido! <%= @user.email %></h1>
-<% unless @menu.nil %>
+<% unless @menu.nil? %>
 	<h2>Menú Actual</h2>
 	<%= link_to 'Ver lista de compra', show_shopping_list_path %> | <%= link_to 'Editar Menu', edit_menu_path(@menu) %>
 
