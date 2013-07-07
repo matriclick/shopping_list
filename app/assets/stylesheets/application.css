@@ -41,27 +41,15 @@ h2 {
 li {
 	list-style:none;
 }
+.content {
+	width:900px;
+	padding:10px 0 43px;
+	position:relative;
+	z-index:1;
+    margin:0 auto;
+}
 p.notice, p.alert {
 	background:white;
 	text-align:center;
 	color:green;
-}
-
-button, input[type="button"], input[type="submit"] {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background-color:#000000;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #ffffff;
-	display:inline-block;
-	color:#ffffff;
-	font-size:12px;
-	padding:6px 24px;
-	text-decoration:none;
-}button:hover, input[type="button"]:hover, input[type="submit"]:hover {
-	background-color:#696969;
-	cursor:pointer;
 }

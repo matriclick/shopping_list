@@ -10,8 +10,9 @@
 </head>
 <body>
 <%= render 'layouts/header' %>
-<%= render 'layouts/top_menu' %>
-<div class="container">
+<% if @home || false %>
+	<%= yield %>
+<% else %>
 	<div class="content">
 		<% if !notice.nil? %>
 			<p class="notice"><%= notice %></p>
@@ -23,7 +24,7 @@
 			<%= yield %>
 		</div>
 	</div>
-	<%= render 'layouts/footer' %>
-</div>
+<% end %>
+<%= render 'layouts/footer' %>
 </body>
 </html>
