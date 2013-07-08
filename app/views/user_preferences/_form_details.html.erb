@@ -12,15 +12,26 @@
   <% end %>
 
   <div class="field">
-	<%= f.label :ingredients, 'Ingredientes que no puedes consumir o no te gustan' %>
-	<% Ingredient.all.each do |i| %>
+    <%= f.label :day_to_send_email %><br />
+    <%= f.number_field :day_to_send_email %>
+  </div>
+  <div class="field">
+    <%= f.label :week_time_span %><br />
+    <%= f.number_field :week_time_span %>
+  </div>
+  <div class="field">
+    <%= f.label :people %><br />
+    <%= f.number_field :people %>
+  </div>
+  <div class="field">
+	<%= f.label :meals, 'Comidas para incluír en el menú' %>
+	<% Meal.all.each do |i| %>
 		<div style="margin-top:5px">
-			<%= check_box_tag("user_preference[ingredient_ids][]", i.id, (@user_preference.ingredients.include? i)) %> 
+			<%= check_box_tag("user_preference[meal_ids][]", i.id, (@user_preference.meals.include? i)) %> 
 			<span style="color:#555"><%= i.name.capitalize %></span>
 		</div>
 	<% end %>
   </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>

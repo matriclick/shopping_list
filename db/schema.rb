@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623194305) do
+ActiveRecord::Schema.define(:version => 20130708030227) do
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(:version => 20130623194305) do
   create_table "ingredients_user_preferences", :id => false, :force => true do |t|
     t.integer "user_preference_id"
     t.integer "ingredient_id"
+  end
+
+  create_table "meals", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "meals_user_preferences", :id => false, :force => true do |t|
+    t.integer "meal_id"
+    t.integer "user_preference_id"
   end
 
   create_table "measures", :force => true do |t|
@@ -103,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20130623194305) do
     t.integer  "day_to_send_email"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "week_time_span"
+    t.integer  "people"
   end
 
   create_table "users", :force => true do |t|
@@ -118,6 +132,8 @@ ActiveRecord::Schema.define(:version => 20130623194305) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "name"
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

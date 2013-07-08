@@ -20,6 +20,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover {
 }
 
 input.rounded {
+	width:250px;
     border: 1px solid #ccc;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;

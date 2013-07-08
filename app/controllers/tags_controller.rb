@@ -78,10 +78,15 @@ class TagsController < ApplicationController
   
   # PUT /update-tags-for-user/1.json
   def update_tags_for_user
+    if @user.sign_in_count > 1
+      redirect = home_user_home_path
+    else
+      redirect = edit_user_preference_path(@user.user_preference)
+    end
     
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to home_user_home_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to redirect, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "assign_to_user" }

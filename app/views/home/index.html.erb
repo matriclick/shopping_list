@@ -1,7 +1,23 @@
+<script>
+	$(function(){
+		$('input:text').each(function(){
+			var txtval = $(this).val();
+			$(this).focus(function(){
+				$(this).val('')
+			});
+			$(this).blur(function(){
+				if($(this).val() == ""){
+					$(this).val(txtval);
+				}
+			});
+		});
+	});
+</script>
+
 <div style="background-color: black; text-align:center; padding:1px 0px 1px 0px">
 </div>
 <div style="text-align:center; margin-top:200px; left:30%; position:absolute; z-index:99;">
-	¡¡Hola!!
+	¡¡Bienvenido!!
 </div>
 
 <div class="center" id="home_content">
@@ -18,8 +34,8 @@
 		min-height: 1px;
 		padding: 0 15px;
 		position: relative;">
-			<h1>HIGH FIDELITY PROTOTYPING & COLLABORATION — FOR DESIGNERS, BY DESIGNERS</h1>
-			<h2>Whether you need to quickly share a single mockup or demo a complex mobile app, InVision gives you the tools to show off your designs like never before.</h2>
+			<h1>TU MENÚ SEMANAL, TU LISTA DE COMPRAS, TUS RECETAS</h1>
+			<h2>Shopping List te genera de forma automática tu lista de compras y el menú de recetas para que comas como a ti te gusta de forma simple y conveniente.</h2>
 		</div>
 		<div style="
 			background: url(<%= asset_path 'landing_page/video-in-laptop.png' %>) no-repeat center top;
@@ -39,12 +55,14 @@
 
 <div style="">
 	<div style="width:984px; margin:0 auto; padding: 50px 0 50px;">
-		<h1>Sign up for FREE and start using Shopping List in seconds</h1>
-		<div style="text-align:center; margin:10px">
-			<input type="text" class="rounded" value="Nombre" /> 
-			<input type="text" class="rounded" value="Correo" /> 
-			<input type="text" class="rounded" value="Clave" />
-			<input type="submit">
+		<h1>Regístrate GRATIS y comienza a generar tu menú y lista de compras de inmediato</h1>
+		<div style="text-align:center; margin-top:10px">
+			<%= form_for resource, :url => registration_path(resource_name) do |f| %>
+				<%= f.text_field :name, value: 'Nombre', class: 'rounded', style: 'margin-right:5px' %>
+			  	<%= f.text_field :email, value: 'Correo', class: 'rounded', style: 'margin-right:5px' %>
+			  	<%= f.password_field :password, value: 'Clave', class: 'rounded', style: 'margin-right:5px' %>
+			  	<%= f.submit "Entrar", style: 'font-size:20px' %>
+			<% end %>
 		</div>
 	</div>
 	<div style="text-align:center; margin-top:200px; left:30%; position:absolute; z-index:99;">

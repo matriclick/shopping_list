@@ -18,6 +18,14 @@ aux << (Measure.find_by_name("Litros") || Measure.create(:name => 'Litros'))
 aux.each { |x| puts x.name}
 puts "\n"
 
+puts "--> Measures:"
+aux = []
+aux << (Meal.find_by_name("Desayuno") || Meal.create(:name => 'Desayuno'))
+aux << (Meal.find_by_name("Almuerzo") || Meal.create(:name => 'Almuerzo'))
+aux << (Meal.find_by_name("Comida") || Meal.create(:name => 'Comida'))
+aux.each { |x| puts x.name}
+puts "\n"
+
 puts "--> Ingredients:"
 aux = []
 aux << (Ingredient.find_by_name("Naranja") || Ingredient.create(:name => 'Naranja', :price => 1000, :quantity_for_price => 1))
