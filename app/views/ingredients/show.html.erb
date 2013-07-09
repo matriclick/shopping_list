@@ -15,7 +15,9 @@
   <%= number_to_currency @ingredient.price, :precision => 0 %>
 cada <%= @ingredient.quantity_for_price %> <%= @ingredient.measure.name %>
 </p>
-
+<p>
+  <%= image_tag @ingredient.ingredient_images.first.image.url(:thumb) %>
+</p>
 <p>
   <b>Description:</b>
   <%= @ingredient.description %>

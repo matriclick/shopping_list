@@ -4,16 +4,22 @@
   <b>Name:</b>
   <%= @recipe.name %>
 </p>
-
+<p>
+  <%= image_tag @recipe.recipe_images.first.image.url(:thumb) %>
+</p>
 <p>
   <b>Ingredientes:</b>
+  <br />
   <% @recipe.recipe_ingredients.each do |ri| %>
-	- <%= link_to ri.ingredient.name, ri.ingredient %> <%= ri.quantity %> <%= ri.ingredient.measure.name %><br />
+	- <%= link_to ri.ingredient.name, ri.ingredient %> 
+	  <%= ri.quantity %> 
+	  <%= ri.ingredient.measure.name if !ri.ingredient.measure.nil? %><br />
   <% end %>
 </p>
 
 <p>
   <b>Tags:</b>
+  <br />
   <% @recipe.tags.each do |tag| %>
 	- <%= tag.name %><br />
   <% end %>

@@ -12,21 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name %> <%= f.text_field :name %>
   </div>
+  <br />
   <div class="field">
-	<%= f.label :measure_id, 'Medida' %><br />
-  	<%= f.collection_select :measure_id, Measure.all, :id, :name, :prompt => true, :allow_blank => false %>
+	<%= f.fields_for :ingredient_images do |f| %>
+		<div class="fields">
+			<%= render 'ingredient_image_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Imagen", f, :ingredient_images %> <em>(solo imágenes cuadradas)</em>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
+	<%= f.label :measure_id, 'Medida' %> 
+	<%= f.collection_select :measure_id, Measure.all, :id, :name, :prompt => true, :allow_blank => false %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :quantity_for_price %><br />
-    <%= f.text_field :quantity_for_price %>
+	<%= f.label :price %> <%= f.text_field :price %>
   </div>
+  <br />
+  <div class="field">
+    <%= f.label :quantity_for_price %> <%= f.text_field :quantity_for_price %>
+  </div>
+  <br />
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>

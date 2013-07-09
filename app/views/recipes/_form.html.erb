@@ -15,9 +15,17 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <br />
 	
-  <%= render 'recipe_ingredient_fields', :f => f %>
-  <p><%= f.link_to_add "Agregar Ingrediente", :recipe_ingredients %></p>	
+  <div class="field">
+	<%= f.fields_for :recipe_ingredients do |f| %>
+		<div class="fields">
+		  <%= render 'recipe_ingredient_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_ingredients %> <em>(solo imágenes cuadradas)</em>
+  </div>
+  <br />
 
   <div class="field">
 	<%= f.label :tag, 'Tags' %>
@@ -28,21 +36,35 @@
 		</div>
 	<% end %>
   </div>
+  <br />
 
   <div class="field">
     <%= f.label :cooking_time %><br />
     <%= f.number_field :cooking_time %> minutos
   </div>
+  <br />
+
+  <div class="field">
+	<%= f.fields_for :recipe_images do |f| %>
+		<div class="fields">
+			<%= render 'recipe_image_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Imagen de Receta", f, :recipe_images %> <em>(solo imágenes cuadradas)</em>
+  </div>
+  <br />
 
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  <br />
 
   <div class="field">
     <%= f.label :dificulty %><br />
     <%= f.number_field :dificulty %>
   </div>
+  <br />
 
   <div class="field">
     <%= f.label :dificulty_reason %><br />

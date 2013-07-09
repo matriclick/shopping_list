@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708030227) do
+ActiveRecord::Schema.define(:version => 20130709015916) do
+
+  create_table "ingredient_images", :force => true do |t|
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "ingredient_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -66,6 +76,16 @@ ActiveRecord::Schema.define(:version => 20130708030227) do
   create_table "menus_recipes", :id => false, :force => true do |t|
     t.integer "recipe_id"
     t.integer "menu_id"
+  end
+
+  create_table "recipe_images", :force => true do |t|
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "recipe_id"
   end
 
   create_table "recipe_ingredients", :force => true do |t|

@@ -1,9 +1,7 @@
-<%= f.fields_for :recipe_ingredients do |ri| %>
-	<div class="fields">
-		<%= ri.label :ingredient_id, 'Ingrediente' %><br />
-		<%= ri.collection_select :ingredient_id, Ingredient.all, :id, :name, :prompt => true, :allow_blank => false %>
-		<%= ri.text_field :quantity %> Kgs
-  		<%= ri.link_to_remove "eliminar" %>
-	</div>
-<% end %>
+<div class="fields">
+	<%= f.label :ingredient_id, 'Ingrediente' %><br />
+	<%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, :prompt => true, :allow_blank => false %>
+	<%= f.text_field :quantity %> Kgs
+ 	<%= link_to_remove_fields "(eliminar)", f %>
+</div>
 
