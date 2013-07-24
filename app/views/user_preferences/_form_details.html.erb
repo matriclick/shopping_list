@@ -10,21 +10,25 @@
       </ul>
     </div>
   <% end %>
-
+  <br />
   <div class="field">
-    <%= f.label :day_to_send_email %><br />
-    <%= f.number_field :day_to_send_email %>
+    <%= f.label :day_to_send_email, '¿Qué días quieres recibir el menú y la lista de compras?' %>
+	<%= f.select :day_to_send_email, 
+				[['Lunes', 2], ['Martes', 3], ['Miércoles', 4], ['Jueves', 5], ['Viernes', 6], ['Sábado', 7], ['Domingo', 1]] %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :week_time_span %><br />
-    <%= f.number_field :week_time_span %>
+    <%= f.label :week_time_span, '¿Cada cuántas semanas quieres que te enviemos un nuevo menú?' %>
+	<%= f.select :week_time_span, [[1, 1], [2, 2], [3, 3], [4, 4]] %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :people %><br />
-    <%= f.number_field :people %>
+    <%= f.label :people, '¿Cuántas personas debe considerar el menú?' %>
+	<%= f.select :week_time_span, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]] %>
   </div>
+  <br />
   <div class="field">
-	<%= f.label :meals, 'Comidas para incluír en el menú' %>
+	<%= f.label :meals, '¿Qué comidas quieres que incluya el menú?' %>
 	<% Meal.all.each do |i| %>
 		<div style="margin-top:5px">
 			<%= check_box_tag("user_preference[meal_ids][]", i.id, (@user_preference.meals.include? i)) %> 
@@ -32,7 +36,8 @@
 		</div>
 	<% end %>
   </div>
+  <br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Actualizar ajustes' %>
   </div>
 <% end %>

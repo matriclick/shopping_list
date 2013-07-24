@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709015916) do
+ActiveRecord::Schema.define(:version => 20130720061347) do
+
+  create_table "ingredient_categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "ingredient_images", :force => true do |t|
     t.datetime "created_at",         :null => false
@@ -29,9 +36,10 @@ ActiveRecord::Schema.define(:version => 20130709015916) do
     t.float    "price"
     t.float    "quantity_for_price"
     t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "slug"
+    t.integer  "ingredient_category_id"
   end
 
   add_index "ingredients", ["slug"], :name => "index_ingredients_on_slug", :unique => true
@@ -46,6 +54,11 @@ ActiveRecord::Schema.define(:version => 20130709015916) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "meals_recipes", :id => false, :force => true do |t|
+    t.integer "meal_id"
+    t.integer "recipe_id"
   end
 
   create_table "meals_user_preferences", :id => false, :force => true do |t|
@@ -78,6 +91,20 @@ ActiveRecord::Schema.define(:version => 20130709015916) do
     t.integer "menu_id"
   end
 
+  create_table "privacy_levels", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "recipe_dificulties", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "recipe_images", :force => true do |t|
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
@@ -88,30 +115,81 @@ ActiveRecord::Schema.define(:version => 20130709015916) do
     t.integer  "recipe_id"
   end
 
+  create_table "recipe_ingredient_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "recipe_ingredients", :force => true do |t|
     t.integer  "recipe_id"
     t.integer  "ingredient_id"
     t.float    "quantity"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "measure_id"
+    t.integer  "recipe_ingredient_type_id"
+  end
+
+  create_table "recipe_steps", :force => true do |t|
+    t.integer  "position"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "recipe_id"
+  end
+
+  create_table "recipe_user_added_ingredients", :force => true do |t|
+    t.float    "quantity"
+    t.integer  "measure_id"
+    t.integer  "user_added_ingredient_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "recipe_id"
+    t.string   "name"
   end
 
   create_table "recipes", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "slug"
     t.integer  "dificulty"
     t.text     "dificulty_reason"
     t.integer  "cooking_time"
+    t.integer  "privacy_level_id"
+    t.integer  "recipe_dificulty_id"
+    t.integer  "user_id"
+    t.integer  "people"
   end
 
   add_index "recipes", ["slug"], :name => "index_recipes_on_slug", :unique => true
 
+  create_table "recipes_shopping_lists", :id => false, :force => true do |t|
+    t.integer "recipe_id"
+    t.integer "shopping_list_id"
+  end
+
   create_table "recipes_tags", :id => false, :force => true do |t|
     t.integer "recipe_id"
     t.integer "tag_id"
+  end
+
+  create_table "shopping_list_items", :force => true do |t|
+    t.integer  "ingredient_id"
+    t.integer  "measure_id"
+    t.float    "quantity"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "shopping_list_id"
+  end
+
+  create_table "shopping_lists", :force => true do |t|
+    t.integer  "status_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -128,6 +206,12 @@ ActiveRecord::Schema.define(:version => 20130709015916) do
   create_table "tags_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "tag_id"
+  end
+
+  create_table "user_added_ingredients", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_preferences", :force => true do |t|

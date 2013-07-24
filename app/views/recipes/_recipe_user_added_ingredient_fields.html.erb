@@ -1,0 +1,6 @@
+<div class="fields">
+	<%= f.text_field :quantity %>
+	<%= f.collection_select :measure_id, Measure.all, :id, :name, :prompt => true, :allow_blank => false %>
+	<%= f.text_field :name %>
+ 	<%= link_to_remove_fields "(eliminar)", f %>
+</div>

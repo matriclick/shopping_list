@@ -6,12 +6,14 @@ class HomeController < ApplicationController
   end
   
   def user_home
-    @user = current_user
-    @menu = @user.get_last_menu
+    @recipes = Recipe.all
   end
   
   def administrator_home
-    @user = current_user
+  end
+  
+  def shopping_list
+    @shopping_list = @user.shopping_lists.last
   end
   
 end

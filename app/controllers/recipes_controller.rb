@@ -1,4 +1,11 @@
 class RecipesController < ApplicationController
+  
+  def add_recipe_to_shopping_list
+    @recipe = Recipe.find(params[:id])
+    @recipe.add_to_shopping_list(current_user.get_current_shopping_list)
+    redirect_to home_shopping_list_path
+  end
+  
   # GET /recipes
   # GET /recipes.json
   def index
@@ -25,8 +32,11 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.json
   def new
-    @recipe = Recipe.new
+    @recipe = Recipe.new    
     @recipe.recipe_ingredients.build
+    @recipe.recipe_images.build
+    @recipe.recipe_steps.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @recipe }

@@ -1,22 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @recipe.name %>
-</p>
+<h1><%= @recipe.name %></h1>
+<h2>Autor: <%= @recipe.user.name %></h2>
 <p>
   <%= image_tag @recipe.recipe_images.first.image.url(:thumb) %>
+</p>
+<p>
+	<%= link_to '(Agregar ingredientes a la lista de compras)', add_recipe_to_shopping_list_path(:id => @recipe.id) %>
 </p>
 <p>
   <b>Ingredientes:</b>
   <br />
   <% @recipe.recipe_ingredients.each do |ri| %>
-	- <%= link_to ri.ingredient.name, ri.ingredient %> 
-	  <%= ri.quantity %> 
-	  <%= ri.ingredient.measure.name if !ri.ingredient.measure.nil? %><br />
+	- <%= ri.quantity %> <%= ri.measure.name %> <%= link_to ri.ingredient.name, ri.ingredient %> <br />
+  <% end %>
+  <% @recipe.recipe_user_added_ingredients.each do |ri| %>
+	- <%= ri.quantity %> <%= ri.measure.name %> <%= ri.name %><br />
   <% end %>
 </p>
-
+<p>
+  <b>Pasos:</b>
+  <br />
+  <% @recipe.recipe_steps.each do |rs| %>
+	<%= rs.description %> <br />
+  <% end %>
+</p>
 <p>
   <b>Tags:</b>
   <br />
@@ -26,19 +34,18 @@
 </p>
 
 <p>
-  <b>Dificulty:</b>
-  <%= @recipe.dificulty %>
+  <b>Aplica para:</b>
+  <br />
+  <% @recipe.meals.each do |meal| %>
+	- <%= meal.name %><br />
+  <% end %>
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @recipe.description %>
+  <b>Dificultad:</b>
+  <%= @recipe.recipe_dificulty.name %>
 </p>
 
-<% if @user.admin? %>
-	<%= link_to 'Volver al menú', show_menu_for_user_path %> | 
-	<%= link_to 'Edit', edit_recipe_path(@recipe) %> | 
-	<%= link_to 'Back', recipes_path %>
-<% else %>
-	<%= link_to 'Volver al menú', :back %>
-<% end %>
+<%= link_to 'Volver al menú', show_menu_for_user_path %> | 
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> | 
+<%= link_to 'Back', recipes_path %>

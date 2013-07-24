@@ -1,0 +1,10 @@
+<% menu.recipes.each_with_index do |r, i| %>
+	<b><%=  l (menu.start_date + i.days), :format => :day_month_year  %></b>
+	<ul>
+		<% if !r.recipe_images.first.nil? %>
+			<li><%= link_to r.name, r %><br /><%= link_to image_tag(r.recipe_images.first.image.url(:thumb)), r %></li>
+		<% else %>
+			<li><%= link_to r.name, r %></li>
+		<% end %>
+	</ul>
+<% end %>

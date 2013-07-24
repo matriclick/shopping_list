@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   after_create :create_user_preference
   
   has_many :menus
+  has_many :shopping_lists
+  
   has_one :user_preference
   has_and_belongs_to_many :tags
   
@@ -16,7 +18,20 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body, :password_confirmation
   
   def get_last_menu
-    self.menus.last
+    menu = self.menus.last
+    if menu.nil?
+      puts 'menu = Menu.create_for_user(self)'
+      menu = Menu.create_for_user(self)
+    end
+    return menu
+  end
+  
+  def get_current_shopping_list
+    if self.shopping_lists.size > 0
+      self.shopping_lists.last
+    else
+      return ShoppingList.create(:user_id => self.id)
+    end
   end
   
   def admin?
@@ -25,6 +40,13 @@ class User < ActiveRecord::Base
   
   def create_user_preference
     UserPreference.create(:user_id => self.id, :day_to_send_email => 6)
+  end
+  
+  def get_next_start_date
+    #Revisar si hay un menú actual
+    #Si no lo hay, retornar la fecha más próxima al día que quiere que se le mande el mail
+    #Si lo hay, ver cuando termina y desde ahí elegir la fecha más próxima
+    return DateTime.now
   end
   
 end

@@ -3,11 +3,22 @@ class Menu < ActiveRecord::Base
   has_and_belongs_to_many :recipes
   belongs_to :user
   
-  attr_accessible :end_date, :shopping_list, :start_date, :user, :recipe_ids
+  attr_accessible :end_date, :shopping_list, :start_date, :user, :recipe_ids, :user_id, :number_of_persons, :recipes
+  
+  def self.create_for_user(user)
+    user_id = user.id
+    start_date = user.get_next_start_date
+    end_date = start_date + (user.user_preference.week_time_span*7).days
+    menu = Menu.create(:start_date => start_date, :end_date => end_date, :user_id => user_id, :number_of_persons => user.user_preference.people)
+    menu.assign_recipes_according_to_user
+    menu.save
+    return menu
+  end
   
   def assign_recipes_according_to_user
     recipes_available = Array.new
-    self.user.tags.each do |tag|
+    #self.user.tags.each do |tag|
+    Tag.all.each do |tag|
       recipes_available.concat(tag.recipes)
     end
     recipes_available.shuffle #Desordeno el arreglo para que no todos los menús sean iguales
@@ -47,7 +58,9 @@ class Menu < ActiveRecord::Base
     end    
     ingredients.each do |ingredient_id, quantity|
       ingredient = Ingredient.find(ingredient_id)
-      self.shopping_list += ingredient.name+' - Cantidad '+quantity.to_s+' '+ingredient.measure.name+'\n' 
+      if !ingredient.nil? and !ingredient.name.nil? and !ingredient.measure.nil? and !ingredient.measure.name.nil?
+        self.shopping_list += ingredient.name+' - Cantidad '+quantity.to_s+' '+ingredient.measure.name+'\n' 
+      end
     end
   end
   

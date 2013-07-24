@@ -21,10 +21,46 @@ puts "\n"
 puts "--> Measures:"
 aux = []
 aux << (Meal.find_by_name("Desayuno") || Meal.create(:name => 'Desayuno'))
-aux << (Meal.find_by_name("Almuerzo") || Meal.create(:name => 'Almuerzo'))
-aux << (Meal.find_by_name("Comida") || Meal.create(:name => 'Comida'))
+aux << (Meal.find_by_name("Plato Principal") || Meal.create(:name => 'Plato Principal'))
+aux << (Meal.find_by_name("Acompañamiento") || Meal.create(:name => 'Acompañamiento'))
+aux << (Meal.find_by_name("Ensalada") || Meal.create(:name => 'Ensalada'))
+aux << (Meal.find_by_name("Aperitivo") || Meal.create(:name => 'Aperitivo'))
+aux << (Meal.find_by_name("Entrada") || Meal.create(:name => 'Entrada'))
+aux << (Meal.find_by_name("Postre") || Meal.create(:name => 'Postre'))
+aux << (Meal.find_by_name("Tragos") || Meal.create(:name => 'Tragos'))
 aux.each { |x| puts x.name}
 puts "\n"
+
+puts "--> PrivacyLevel:"
+aux = []
+aux << (PrivacyLevel.find_by_name("Privado") || PrivacyLevel.create(:name => 'Privado', :description => 'Solo visible para el usuario que crea la receta'))
+aux << (PrivacyLevel.find_by_name("Público") || PrivacyLevel.create(:name => 'Público', :description => 'Visible para todos los usuarios'))
+aux.each { |x| puts x.name}
+puts "\n"
+
+puts "--> RecipeDificulty:"
+aux = []
+aux << (RecipeDificulty.find_by_name("Fácil") || RecipeDificulty.create(:name => 'Fácil', :description => 'Todos lo pueden cocinar'))
+aux << (RecipeDificulty.find_by_name("Medio") || RecipeDificulty.create(:name => 'Medio', :description => 'Personas con experiencia'))
+aux << (RecipeDificulty.find_by_name("Difícil") || RecipeDificulty.create(:name => 'Difícil', :description => 'Para expertos'))
+aux << (RecipeDificulty.find_by_name("Para Chefs") || RecipeDificulty.create(:name => 'Para Chefs', :description => 'Para personas con estudios de gastronomía'))
+aux.each { |x| puts x.name}
+puts "\n"
+
+puts "--> RecipeIngredientType:"
+aux = []
+aux << (RecipeIngredientType.find_by_name("Principal") || RecipeIngredientType.create(:name => 'Principal'))
+aux << (RecipeIngredientType.find_by_name("Secundario") || RecipeIngredientType.create(:name => 'Secundario'))
+aux.each { |x| puts x.name}
+puts "\n"
+
+puts "--> IngredientCategory:"
+aux = []
+aux << (IngredientCategory.find_by_name("Vegetales") || IngredientCategory.create(:name => 'Vegetales'))
+aux << (IngredientCategory.find_by_name("Carnes") || IngredientCategory.create(:name => 'Carnes'))
+aux.each { |x| puts x.name}
+puts "\n"
+
 
 puts "--> Ingredients:"
 aux = []

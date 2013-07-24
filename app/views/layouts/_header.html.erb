@@ -3,17 +3,24 @@
 		<div class="left">
 			<%= link_to image_tag('logo/logo.jpg'), home_user_home_path %>
 		</div>
-		<div class="user_nav right" style="text-align:right">
+		<div class="user_nav right" style="text-align:right; font-size:11px">
 			<div>
 				<% if user_signed_in? %>
-				  Signed in as <%= current_user.email %>. Not you?
+				  Hola <%= current_user.name %>! |
+  				  <%= link_to "Ver Perfil", new_user_session_path %> | 
 				  <%= link_to "Salir", destroy_user_session_path, :method => :delete %>
 				<% else %>
 				  <%= link_to "Entrar", new_user_session_path %> | <%= link_to "Registrarse", new_user_registration_path %>
 				<% end %>
 			</div>
-			<div style="margin-top:20px">
-				INICIO | RECETAS | SOBRE NOSOTROS | BLOG
+			<div style="margin-top:20px; font-size:12px">
+				<%= link_to 'INICIO', home_user_home_path %> | 
+				VER RECETAS | 
+				<%= link_to 'AGREGAR RECETAS', new_recipe_path %> | 
+				MIS RECETAS | 
+				MENU PLAN | 
+				<%= link_to 'LISTA DE COMPRAS ('+@user.get_current_shopping_list.number_of_items.to_s+' items)', home_shopping_list_path %> | 
+				REVISTA
 			</div>
 		</div>
 	</div>

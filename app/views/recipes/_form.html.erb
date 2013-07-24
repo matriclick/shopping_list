@@ -10,20 +10,48 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
   <br />
 	
+  <div class="field">
+    <%= f.label :name, 'Nombre de la receta' %> <%= f.text_field :name %>
+  </div>
+  <br />
+  <div class="field">
+  	Autor: <%= @user.name %>
+	<%= f.hidden_field :user_id, value: @user.id %>
+  </div>
+  <br />
+
+  <div class="field">
+	<%= f.fields_for :recipe_images do |f| %>
+		<div class="fields">
+			<%= render 'recipe_image_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Imagen de Receta", f, :recipe_images %> <em>(solo imágenes cuadradas)</em>
+  </div>
+  <br />
+
+  Agregar ingredientes que ya existen en la base de datos <br/>
+  <em>Si no encuentras el ingrediente que buscas, abajo lo podrás escribir</em>
   <div class="field">
 	<%= f.fields_for :recipe_ingredients do |f| %>
 		<div class="fields">
 		  <%= render 'recipe_ingredient_fields', :f => f %>
 		</div>
 	<% end %>
-  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_ingredients %> <em>(solo imágenes cuadradas)</em>
+  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_ingredients %>
+  </div>
+  <br />
+
+  <em>Si no encontraste los ingredientes que buscabas en la lista, puedes escribirlo acá</em>
+  <div class="field">
+	<%= f.fields_for :recipe_user_added_ingredients do |f| %>
+		<div class="fields">
+		  <%= render 'recipe_user_added_ingredient_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_user_added_ingredients %>
   </div>
   <br />
 
@@ -39,38 +67,55 @@
   <br />
 
   <div class="field">
-    <%= f.label :cooking_time %><br />
-    <%= f.number_field :cooking_time %> minutos
+    <%= f.label :cooking_time, 'Tiempo de preparación' %> <%= f.number_field :cooking_time %> minutos
   </div>
   <br />
 
   <div class="field">
-	<%= f.fields_for :recipe_images do |f| %>
-		<div class="fields">
-			<%= render 'recipe_image_fields', :f => f %>
+    <%= f.label :people, 'Personas que comen' %> <%= f.number_field :people %>
+  </div>
+  <br />
+
+  <div class="field">
+	<%= f.label :meals, 'Comidas para las que aplica esta receta' %>
+	<% Meal.all.each do |i| %>
+		<div style="margin-top:5px">
+			<%= check_box_tag("recipe[meal_ids][]", i.id, (@recipe.meals.include? i)) %> 
+			<span style="color:#555"><%= i.name.capitalize %></span>
 		</div>
 	<% end %>
-  	<%= link_to_add_fields "Agregar Imagen de Receta", f, :recipe_images %> <em>(solo imágenes cuadradas)</em>
+  </div>
+  <br />
+  Pasos para preparar la receta <em>(escribe las instrucciones separando cada etapa como un paso)</em>
+  <div class="field">
+	<%= f.fields_for :recipe_steps do |f| %>
+		<div class="fields">
+		  <%= render 'recipe_step_fields', :f => f %>
+		</div>
+	<% end %>
+  	<%= link_to_add_fields "Agregar Paso", f, :recipe_steps %>
   </div>
   <br />
 
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.label :recipe_dificulty, 'Nivel de Dificultad' %> 
+	<%= f.collection_select :recipe_dificulty_id, RecipeDificulty.all, :id, :name, :prompt => true, :allow_blank => false %>
+  </div>
+
+  <br />
+
+  <div class="field">
+    <%= f.label :dificulty_reason, '¿Por qué ese nivel de dificultad?' %><br />
+    <%= f.text_area :dificulty_reason, size: '95x5' %>
   </div>
   <br />
 
   <div class="field">
-    <%= f.label :dificulty %><br />
-    <%= f.number_field :dificulty %>
+    <%= f.label :privacy_level, 'Nivel de Privacidad' %> 
+	<%= f.collection_select :privacy_level_id, PrivacyLevel.all, :id, :name, :prompt => true, :allow_blank => false %>
   </div>
+
   <br />
-
-  <div class="field">
-    <%= f.label :dificulty_reason %><br />
-    <%= f.text_area :dificulty_reason %>
-  </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>

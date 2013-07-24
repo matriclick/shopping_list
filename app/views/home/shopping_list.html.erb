@@ -1,0 +1,3 @@
+<% @shopping_list.shopping_list_items.each do |sli| %>
+	- <%= sli.quantity %> <%= sli.measure.name %> de <%= sli.ingredient.name %><br /><br />
+<% end %>

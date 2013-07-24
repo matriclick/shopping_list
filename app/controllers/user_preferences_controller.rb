@@ -49,7 +49,7 @@ class UserPreferencesController < ApplicationController
         
     respond_to do |format|
       if @user_preference.save
-        format.html { redirect_to redirect, notice: 'User preference was successfully created.' }
+        format.html { redirect_to @user_preference, notice: 'User preference was successfully created.' }
         format.json { render json: @user_preference, status: :created, location: @user_preference }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class UserPreferencesController < ApplicationController
   def update
     @user_preference = UserPreference.find(params[:id])
     
-    if params[:user_preference][:day_to_send_email].nil?
+    if params[:user_preference].nil? or params[:user_preference][:day_to_send_email].nil?
       redirect = user_preferences_details_path(id: @user_preference.id)
     else
       redirect = home_user_home_path

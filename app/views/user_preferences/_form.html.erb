@@ -12,7 +12,8 @@
   <% end %>
 
   <div class="field">
-	<%= f.label :ingredients, 'Ingredientes que no puedes consumir o no te gustan' %>
+	<%= f.label :ingredients, '¿Qué ingredientes que no puedes consumir o no te gustan?' %>
+	<em>Para generar tus menú no incluiremos lo que que selecciones acá.</em>
 	<% Ingredient.all.each do |i| %>
 		<div style="margin-top:5px">
 			<%= check_box_tag("user_preference[ingredient_ids][]", i.id, (@user_preference.ingredients.include? i)) %> 
@@ -22,6 +23,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Actualizar preferencias' %>
   </div>
 <% end %>

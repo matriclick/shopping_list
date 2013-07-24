@@ -12,6 +12,8 @@ ShoppingCart::Application.routes.draw do
   devise_for :users
   resources :ingredients
   resources :recipes
+  get 'add_recipe_to_shopping_list/:id' => 'recipes#add_recipe_to_shopping_list', :as => 'add_recipe_to_shopping_list'
+  
   resources :tags
   get "assign-tag-to-user" => 'tags#assign_to_user', :as => 'tags_assign_to_user'
   put "update-tags-for-user" => "tags#update_tags_for_user", :as => 'update_tags_for_user'
@@ -21,6 +23,7 @@ ShoppingCart::Application.routes.draw do
   get "home/index"
   get "home/user_home"
   get "home/administrator_home"
+  get "home/shopping_list"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

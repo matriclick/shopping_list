@@ -1,7 +1,8 @@
 <ul>
 	<li><%= link_to 'Menú Actual', '#' %></li>
 	<li><%= link_to 'Historial Menús', '#' %></li>
-	<li><%= link_to 'Estilos', '#' %></li>	
-	<li><%= link_to 'Preferencias', '#' %></li>	
+	<li><%= link_to 'Estilos', tags_assign_to_user_path %></li>	
+	<li><%= link_to 'Preferencias', edit_user_preference_path(id: @user.user_preference.id) %></li>	
+	<li><%= link_to 'Ajustes Menú', user_preferences_details_path(id: @user.user_preference.id) %></li>	
 	<li><%= link_to 'Recetas', '#' %></li>
 </ul>
