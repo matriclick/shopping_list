@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_filter :authenticate_user!
   
   def add_recipe_to_shopping_list
     @recipe = Recipe.find(params[:id])

@@ -19,7 +19,9 @@
 				<%= link_to 'AGREGAR RECETAS', new_recipe_path %> | 
 				MIS RECETAS | 
 				MENU PLAN | 
-				<%= link_to 'LISTA DE COMPRAS ('+@user.get_current_shopping_list.number_of_items.to_s+' items)', home_shopping_list_path %> | 
+				<% if user_signed_in? %>
+					<%= link_to 'LISTA DE COMPRAS ('+@user.get_current_shopping_list.number_of_items.to_s+' items)', home_shopping_list_path %> | 
+				<% end %>
 				REVISTA
 			</div>
 		</div>
