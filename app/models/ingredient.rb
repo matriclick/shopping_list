@@ -11,7 +11,7 @@ class Ingredient < ActiveRecord::Base
     
   accepts_nested_attributes_for :ingredient_images, :allow_destroy => true
   
-  validates :description, :measure_id, :name, :price, :quantity_for_price, :presence => true
+  validates :name, :presence => true
   
   attr_accessible :description, :ingredient_category_id, :measure_id, :name, :price, :quantity_for_price, :slug, :ingredient_images_attributes
   

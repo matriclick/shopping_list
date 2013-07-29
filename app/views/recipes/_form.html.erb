@@ -16,42 +16,42 @@
     <%= f.label :name, 'Nombre de la receta' %> <%= f.text_field :name %>
   </div>
   <br />
+
   <div class="field">
   	Autor: <%= @user.name %>
 	<%= f.hidden_field :user_id, value: @user.id %>
   </div>
   <br />
-
+  
+  IMÁGENES
+  <br />
   <div class="field">
 	<%= f.fields_for :recipe_images do |f| %>
-		<div class="fields">
-			<%= render 'recipe_image_fields', :f => f %>
-		</div>
+		<%= render 'recipe_image_fields', :f => f %>
 	<% end %>
-  	<%= link_to_add_fields "Agregar Imagen de Receta", f, :recipe_images %> <em>(solo imágenes cuadradas)</em>
+	<div class="fields">
+  	    <%= link_to_add_fields "Agregar Imagen de Receta", f, :recipe_images %> <em>(solo imágenes cuadradas)</em>
+    </div>
   </div>
   <br />
 
-  Agregar ingredientes que ya existen en la base de datos <br/>
-  <em>Si no encuentras el ingrediente que buscas, abajo lo podrás escribir</em>
+  INGREDIENTES<br/>
+  <div>
+	<div style="width:185px; float:left"><b>Cantidad</b></div>
+	<div style="width:140px; float:left"><b>Medida</b></div>
+	<div style="width:180px; float:left"><b>Nombre</b></div>
+	<div style="width:140px; float:left"><b>Importancia</b></div>
+	<div class="clear"></div>
+  </div>
   <div class="field">
 	<%= f.fields_for :recipe_ingredients do |f| %>
 		<div class="fields">
 		  <%= render 'recipe_ingredient_fields', :f => f %>
 		</div>
 	<% end %>
-  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_ingredients %>
-  </div>
-  <br />
-
-  <em>Si no encontraste los ingredientes que buscabas en la lista, puedes escribirlo acá</em>
-  <div class="field">
-	<%= f.fields_for :recipe_user_added_ingredients do |f| %>
-		<div class="fields">
-		  <%= render 'recipe_user_added_ingredient_fields', :f => f %>
-		</div>
-	<% end %>
-  	<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_user_added_ingredients %>
+	<div class="fields">
+  		<%= link_to_add_fields "Agregar Ingrediente", f, :recipe_ingredients %>
+	</div>
   </div>
   <br />
 
@@ -67,11 +67,19 @@
   <br />
 
   <div class="field">
-    <%= f.label :cooking_time, 'Tiempo de preparación' %> <%= f.number_field :cooking_time %> minutos
+	<em><b>Tiempo de preparación:</b> Tiempo que me demoro cocinando (tiempo que tengo que estar en la cocina)</em><br />
+    <%= f.label :preparation_time, 'Tiempo de preparación' %> <%= f.number_field :cooking_time %> minutos 
   </div>
   <br />
 
   <div class="field">
+	<em><b>Tiempo de cocción:</b> Tiempo que me demoro en cocinar la comida</em><br />
+    <%= f.label :cooking_time, 'Tiempo de cocción' %> <%= f.number_field :cooking_time %> minutos
+  </div>
+  <br />
+
+  <div class="field">
+	<em><b>Personas que comen:</b> Cantidad de personas para las que la receta está pensada</em><br />
     <%= f.label :people, 'Personas que comen' %> <%= f.number_field :people %>
   </div>
   <br />
@@ -93,7 +101,9 @@
 		  <%= render 'recipe_step_fields', :f => f %>
 		</div>
 	<% end %>
-  	<%= link_to_add_fields "Agregar Paso", f, :recipe_steps %>
+	<div class="fields">
+  		<%= link_to_add_fields "Agregar Paso", f, :recipe_steps %>
+	</div>
   </div>
   <br />
 

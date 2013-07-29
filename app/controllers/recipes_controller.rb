@@ -1,5 +1,15 @@
 class RecipesController < ApplicationController
+  autocomplete :ingredient, :name, :full => true
   before_filter :authenticate_user!
+  
+  def search
+    @search_term = params[:q]
+    unless @search_term.nil?
+      @recipes = Recipe.search(@search_term)
+    else
+      redirect_to home_user_home_path
+    end
+  end
   
   def add_recipe_to_shopping_list
     @recipe = Recipe.find(params[:id])
@@ -33,7 +43,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   # GET /recipes/new.json
   def new
-    @recipe = Recipe.new    
+    @recipe = Recipe.new 
     @recipe.recipe_ingredients.build
     @recipe.recipe_images.build
     @recipe.recipe_steps.build

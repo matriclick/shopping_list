@@ -3,4 +3,8 @@ class Meal < ActiveRecord::Base
   has_and_belongs_to_many :recipes
   
   attr_accessible :description, :name
+  
+  def get_four_recipes
+    self.recipes.limit 4
+  end
 end

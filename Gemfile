@@ -13,6 +13,7 @@ gem "friendly_id"
 gem 'rails-i18n'
 gem 'rvm-capistrano'
 gem "paperclip", "~> 3.0"
+gem 'rails3-jquery-autocomplete'
 
 # Gems used only for assets and not required
 # in production environments by default.

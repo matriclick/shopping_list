@@ -11,7 +11,10 @@ ShoppingCart::Application.routes.draw do
   
   devise_for :users
   resources :ingredients
-  resources :recipes
+  get 'recipes/search' => 'recipes#search', :as => 'recipe_search'
+  resources :recipes do
+    get :autocomplete_ingredient_name, :on => :collection
+  end
   get 'add_recipe_to_shopping_list/:id' => 'recipes#add_recipe_to_shopping_list', :as => 'add_recipe_to_shopping_list'
   
   resources :tags

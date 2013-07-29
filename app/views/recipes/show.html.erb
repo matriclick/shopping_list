@@ -1,51 +1,59 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @recipe.name %></h1>
-<h2>Autor: <%= @recipe.user.name %></h2>
-<p>
-  <%= image_tag @recipe.recipe_images.first.image.url(:thumb) %>
-</p>
-<p>
-	<%= link_to '(Agregar ingredientes a la lista de compras)', add_recipe_to_shopping_list_path(:id => @recipe.id) %>
-</p>
-<p>
-  <b>Ingredientes:</b>
-  <br />
-  <% @recipe.recipe_ingredients.each do |ri| %>
-	- <%= ri.quantity %> <%= ri.measure.name %> <%= link_to ri.ingredient.name, ri.ingredient %> <br />
-  <% end %>
-  <% @recipe.recipe_user_added_ingredients.each do |ri| %>
-	- <%= ri.quantity %> <%= ri.measure.name %> <%= ri.name %><br />
-  <% end %>
-</p>
-<p>
-  <b>Pasos:</b>
-  <br />
-  <% @recipe.recipe_steps.each do |rs| %>
-	<%= rs.description %> <br />
-  <% end %>
-</p>
-<p>
-  <b>Tags:</b>
-  <br />
-  <% @recipe.tags.each do |tag| %>
-	- <%= tag.name %><br />
-  <% end %>
-</p>
+<div style="float:left">
+	<h1><%= @recipe.name %></h1>
+	<h2>Autor: <%= @recipe.user.name %></h2>
+	<p>
+	  <%= image_tag @recipe.recipe_images.first.image.url %><br />
+	  <% @recipe.recipe_images.without_cover.each do |image| %>
+		<%= image_tag image.image.url(:thumb) %>
+	  <% end %>
+	</p>
+	<p>
+		<%= link_to '(Agregar ingredientes a la lista de compras)', add_recipe_to_shopping_list_path(:id => @recipe.id) %>
+	</p>
+	<p>
+		<%= link_to 'Volver al menú', show_menu_for_user_path %> | 
+		<%= link_to 'Editar', edit_recipe_path(@recipe) %>
+	</p>	
+</div>
 
-<p>
-  <b>Aplica para:</b>
-  <br />
-  <% @recipe.meals.each do |meal| %>
-	- <%= meal.name %><br />
-  <% end %>
-</p>
+<div style="float:left; margin:50px 0px 0px 20px; max-width:300px;">
+	<p>
+	  <b>Ingredientes:</b>
+	  <br />
+	  <% @recipe.recipe_ingredients.each do |ri| %>
+		- <%= ri.quantity %> <%= ri.measure.name %> <%= ri.ingredient.name %> <br />
+	  <% end %>
+	</p>
+</div>
+<div style="float:left; margin:50px 0px 0px 20px; max-width:300px;">
+	<p>
+	  <b>Pasos:</b>
+	  <br />
+	  <% @recipe.recipe_steps.each do |rs| %>
+		<%= rs.description %> <br />
+	  <% end %>
+	</p>
+	<p>
+	  <b>Tags:</b>
+	  <br />
+	  <% @recipe.tags.each do |tag| %>
+		- <%= tag.name %><br />
+	  <% end %>
+	</p>
 
-<p>
-  <b>Dificultad:</b>
-  <%= @recipe.recipe_dificulty.name %>
-</p>
+	<p>
+	  <b>Aplica para:</b>
+	  <br />
+	  <% @recipe.meals.each do |meal| %>
+		- <%= meal.name %><br />
+	  <% end %>
+	</p>
 
-<%= link_to 'Volver al menú', show_menu_for_user_path %> | 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> | 
-<%= link_to 'Back', recipes_path %>
+	<p>
+	  <b>Dificultad:</b>
+	  <%= @recipe.recipe_dificulty.name %>
+	</p>
+</div>
+<div class="clear"></div>

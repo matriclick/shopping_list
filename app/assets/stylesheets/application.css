@@ -25,9 +25,22 @@ body{
 
 h1 {
 	margin:0px;
+	font:15px "Lato",Arial,Helvetica,sans-serif;
+	font-weight:lighter;
+	color: #555;
+	text-transform:uppercase;
+	padding: 5px 0 5px 0px;
 }
 h2 {
 	margin:0px;
+	font:15px "Lato",Arial,Helvetica,sans-serif;
+	font-weight:lighter;
+	color: #555;
+	padding: 5px 0 5px 0px;
+}
+.header {
+	text-transform: uppercase;
+	font-family: 'Josefin Slab',serif;
 }
 .left {
 	float:left;

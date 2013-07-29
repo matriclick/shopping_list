@@ -1,0 +1,8 @@
+<div style="float:left; margin:10px; background:#f6f6f6; width:220px">
+	<% meal.get_four_recipes.each_with_index do |r, i| %>
+		<%= link_to(image_tag(r.recipe_images.first.image(:thumb)), r, style: 'float:left; margin:3px') %>
+	<% end %>
+	<p style="text-align:center;" class="clear">
+		<%= link_to meal.name, recipe_search_path(q: meal.name) %>
+	</p>
+</div>

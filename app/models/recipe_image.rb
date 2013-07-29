@@ -7,4 +7,11 @@ class RecipeImage < ActiveRecord::Base
     :default_url => "/images/:style/missing.png"
   
   attr_accessible :image
+  
+  def self.without_cover
+		images = all
+		images.slice!(0)
+		images
+	end	
+	
 end

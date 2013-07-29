@@ -13,16 +13,12 @@
 				  <%= link_to "Entrar", new_user_session_path %> | <%= link_to "Registrarse", new_user_registration_path %>
 				<% end %>
 			</div>
-			<div style="margin-top:20px; font-size:12px">
+			<div style="margin-top:20px; font-size:13px; font-weight:bold;">
 				<%= link_to 'INICIO', home_user_home_path %> | 
-				VER RECETAS | 
+				<%= link_to 'VER RECETAS', '#' %> | 
 				<%= link_to 'AGREGAR RECETAS', new_recipe_path %> | 
-				MIS RECETAS | 
-				MENU PLAN | 
-				<% if user_signed_in? %>
-					<%= link_to 'LISTA DE COMPRAS ('+@user.get_current_shopping_list.number_of_items.to_s+' items)', home_shopping_list_path %> | 
-				<% end %>
-				REVISTA
+				<%= link_to 'MIS RECETAS', '#' %> | 
+				<%= link_to 'LISTA DE COMPRAS', home_shopping_list_path %>
 			</div>
 		</div>
 	</div>

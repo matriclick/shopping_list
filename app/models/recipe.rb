@@ -11,13 +11,11 @@ class Recipe < ActiveRecord::Base
   has_and_belongs_to_many :meals
   has_and_belongs_to_many :shopping_lists
 
-  has_many :recipe_user_added_ingredients, :dependent => :destroy  
   has_many :recipe_images, :dependent => :destroy
   has_many :recipe_ingredients, :dependent => :destroy
   has_many :recipe_steps, :dependent => :destroy
   has_many :ingredients, :through => :recipe_ingredients
 
-  accepts_nested_attributes_for :recipe_user_added_ingredients, :allow_destroy => true	
   accepts_nested_attributes_for :recipe_images, :allow_destroy => true	
   accepts_nested_attributes_for :recipe_steps, :allow_destroy => true	
 	accepts_nested_attributes_for :recipe_ingredients, :reject_if => proc { |a| a[:quantity].blank? }, :allow_destroy => true
@@ -26,7 +24,7 @@ class Recipe < ActiveRecord::Base
   	    
   attr_accessible :description, :name, :tag_ids, :recipe_ingredients_attributes, :recipe_images_attributes, 
                   :dificulty_reason, :cooking_time, :dificulty, :slug, :meal_ids, :recipe_steps_attributes, :privacy_level_id,
-                  :recipe_dificulty_id, :recipe_user_added_ingredients_attributes, :user_id
+                  :recipe_dificulty_id, :recipe_user_added_ingredients_attributes, :user_id, :people, :preparation_time
                   
   def get_main_ingredients
     main_type = RecipeIngredientType.find_by_name("Principal")
@@ -61,6 +59,26 @@ class Recipe < ActiveRecord::Base
         shopping_list.save
       end
     end
+  end
+	
+	def self.search(string_filter = nil, separator = ' ')
+    if string_filter.nil?
+      return Recipe.all
+    else
+      keywords = string_filter.split(separator)
+      query = ''
+      keywords.each_with_index do |k, i|
+        if i == 0
+          query = '(tags.name like "%'+k+'%" or meals.name like "%'+k+'%" or users.name like "%'+k+'%" or ingredients.name like "%'+k+'%" or recipes.name like "%'+k+'%")'
+        else
+          query = '(tags.name like "%'+k+'%" or meals.name like "%'+k+'%" or users.name like "%'+k+'%" or ingredients.name like "%'+k+'%" or recipes.name like "%'+k+'%") and '+query
+        end
+      end
+      return self.joins(:ingredients).joins(:user).joins(:tags).joins(:meals).where(query).uniq
+    end
+  end
+    
+  def recipe_images_without_first
   end
   
 end

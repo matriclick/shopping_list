@@ -1,7 +1,7 @@
 <div class="fields">
 	<%= f.text_field :quantity %>
 	<%= f.collection_select :measure_id, Measure.all, :id, :name, :prompt => true, :allow_blank => false %>
-	<%= f.collection_select :ingredient_id, Ingredient.all, :id, :name, :prompt => true, :allow_blank => false %>
+	<%= f.autocomplete_field :ingredient_name, autocomplete_ingredient_name_recipes_path %>
 	<%= f.collection_select :recipe_ingredient_type_id, RecipeIngredientType.all, 
 		:id, :name, :prompt => true, :allow_blank => false %>
  	<%= link_to_remove_fields "(eliminar)", f %>
