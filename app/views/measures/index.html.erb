@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+	<th>Short Name</th>
     <th>Description</th>
     <th></th>
     <th></th>
@@ -12,6 +13,7 @@
 <% @measures.each do |measure| %>
   <tr>
     <td><%= measure.name %></td>
+    <td><%= measure.short_name %></td>
     <td><%= measure.description %></td>
     <td><%= link_to 'Show', measure %></td>
     <td><%= link_to 'Edit', edit_measure_path(measure) %></td>
