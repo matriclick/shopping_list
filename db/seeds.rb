@@ -18,7 +18,7 @@ aux << (Measure.find_by_name("Litros") || Measure.create(:name => 'Litros'))
 aux.each { |x| puts x.name}
 puts "\n"
 
-puts "--> Measures:"
+puts "--> Meals:"
 aux = []
 aux << (Meal.find_by_name("Desayuno") || Meal.create(:name => 'Desayuno'))
 aux << (Meal.find_by_name("Plato Principal") || Meal.create(:name => 'Plato Principal'))

@@ -1,4 +1,7 @@
 ShoppingCart::Application.routes.draw do
+  resources :meals
+  resources :ingredient_categories
+
   resources :user_preferences
   get "user_preferences/details/:id" => 'user_preferences#details', :as => 'user_preferences_details'
   
