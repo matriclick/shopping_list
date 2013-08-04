@@ -24,7 +24,7 @@ class Recipe < ActiveRecord::Base
   	    
   attr_accessible :description, :name, :tag_ids, :recipe_ingredients_attributes, :recipe_images_attributes, 
                   :dificulty_reason, :cooking_time, :dificulty, :slug, :meal_ids, :recipe_steps_attributes, :privacy_level_id,
-                  :recipe_dificulty_id, :recipe_user_added_ingredients_attributes, :user_id, :people, :preparation_time
+                  :recipe_dificulty_id, :recipe_user_added_ingredients_attributes, :user_id, :people, :preparation_time, :introduction
                   
   def get_main_ingredients
     main_type = RecipeIngredientType.find_by_name("Principal")

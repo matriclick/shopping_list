@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803234123) do
+ActiveRecord::Schema.define(:version => 20130804001938) do
 
   create_table "ingredient_categories", :force => true do |t|
     t.string   "name"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20130803234123) do
     t.integer  "user_id"
     t.integer  "people"
     t.integer  "preparation_time"
+    t.text     "introduction"
   end
 
   add_index "recipes", ["slug"], :name => "index_recipes_on_slug", :unique => true

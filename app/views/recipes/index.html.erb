@@ -1,23 +1,16 @@
 <h1>Listing recipes</h1>
 
 <table>
-  <tr>
-    <th>Nombre</th>
-    <th>Ingredientes</th>
-    <th>Nivel de dificultad</th>
-    <th></th>
-  </tr>
-
 <% @recipes.each do |recipe| %>
   <tr>
+    <td><%= image_tag recipe.recipe_images.first.image.url(:thumb) %><br /></td>
     <td><%= recipe.name %></td>
     <td>
 		<% recipe.recipe_ingredients.each do |ri| %>
-			- <%= ri.ingredient.name %><br />
+			- <%= ri.ingredient.name if !ri.ingredient.nil? %><br />
 		<% end %>
 	</td>
-    <td><%= recipe.dificulty %></td>
-    <td><%= recipe.dificulty_reason %></td>
+    <td><%= recipe.introduction %></td>
     <td><%= link_to 'Ver instrucciones', recipe %></td>
 	<% if @user.admin? %>
     	<td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>

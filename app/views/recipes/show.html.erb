@@ -10,6 +10,9 @@
 	  <% end %>
 	</p>
 	<p>
+		<%= @recipe.introduction %>
+	</p>
+	<p>
 		<%= link_to '(Agregar ingredientes a la lista de compras)', add_recipe_to_shopping_list_path(:id => @recipe.id) %>
 	</p>
 	<p>
