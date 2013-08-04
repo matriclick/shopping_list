@@ -6,31 +6,25 @@
 </p>
 <p>
   <b>Categoría:</b>
-  <%= @ingredient.ingredient_category.name %>
+  <%= @ingredient.ingredient_category.name if !@ingredient.ingredient_category.nil? %>
 </p>
 
 <p>
   <b>Measure:</b>
-  <%= @ingredient.measure.name %>
+  <%= @ingredient.measure.name if !@ingredient.measure.nil?  %>
 </p>
 
 <p>
   <b>Price:</b>
   <%= number_to_currency @ingredient.price, :precision => 0 %>
-cada <%= @ingredient.quantity_for_price %> <%= @ingredient.measure.name %>
+cada <%= @ingredient.quantity_for_price %> <%= @ingredient.measure.name  if !@ingredient.measure.nil? %>
 </p>
 <p>
-  <%= image_tag @ingredient.ingredient_images.first.image.url(:thumb) %>
+  <%= image_tag @ingredient.ingredient_images.first.image.url(:thumb)  if !@ingredient.ingredient_images.first.nil? %>
 </p>
 <p>
   <b>Description:</b>
   <%= @ingredient.description %>
 </p>
 
-<% if @user.admin? %>
-	<%= link_to 'Volver a la receta', :back %> |
-	<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
-	<%= link_to 'Back', ingredients_path %>
-<% else %>
-	<%= link_to 'Volver a la receta', :back %>
-<% end %>
+<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> | <%= link_to 'Ver lista de Ingredientes', ingredients_path %>

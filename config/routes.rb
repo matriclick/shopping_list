@@ -13,7 +13,9 @@ ShoppingCart::Application.routes.draw do
   get 'send_shopping_list' => 'menus#send_shopping_list', :as => 'send_shopping_list'
   
   devise_for :users
-  resources :ingredients
+  resources :ingredients do 
+    get :autocomplete_ingredient_name, :on => :collection
+  end
   get 'recipes/search' => 'recipes#search', :as => 'recipe_search'
   resources :recipes do
     get :autocomplete_ingredient_name, :on => :collection

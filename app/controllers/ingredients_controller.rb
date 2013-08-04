@@ -1,6 +1,7 @@
 class IngredientsController < ApplicationController
   before_filter :authenticate_user!
-  
+  autocomplete :ingredient, :name, :full => true
+    
   # GET /ingredients
   # GET /ingredients.json
   def index
