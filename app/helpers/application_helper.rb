@@ -1,5 +1,13 @@
 module ApplicationHelper
-
+  def check_if_current_user_is_chef(chef_profile)
+    if user_signed_in?
+    	if current_user.id == chef_profile.user_id
+    	  return true
+      end
+    end
+    return false
+  end
+  
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end

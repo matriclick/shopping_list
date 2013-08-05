@@ -42,7 +42,7 @@
 					<em style="font-size:10px">| <%= ri.ingredient.name %> |</em> 
 				<% end %>
 				<br />
-				Autor: <%= link_to r.user.name, '#' %>
+				Autor: <%= !r.user.nil? ? link_to(r.user.name, chef_profile_path(r.user.chef_profile)) : 'Privado' %>
 			</p>
 		</div>
 	<% end %>

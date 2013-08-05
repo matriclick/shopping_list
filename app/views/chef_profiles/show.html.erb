@@ -1,0 +1,22 @@
+<div style="float:left; max-width:500px">
+	<h1>Chef <%= @chef_profile.chef_name %></h1>
+	<p>
+		<% if check_if_current_user_is_chef(@chef_profile) %>
+			<%= link_to 'Editar Perfil', edit_chef_profile_path(@chef_profile) %><br />
+		<% end %>
+	  	<%= image_tag @chef_profile.avatar.url(:large) %>
+	</p>
+	<p>
+	  <%= @chef_profile.introduction %>
+	</p>
+</div>
+<div style="float:left; margin-top:30px; margin-left:10px; max-width:350px">
+	<h2>Recetas agregadas</h2>
+	<% @chef_profile.user.recipes.each do |recipe| %>
+		<div style="float:left; margin:10px;">
+			<%= recipe.name %><br />
+			<%= image_tag recipe.recipe_images.first.image.url(:thumb) %>
+		</div>
+	<% end %>
+</div>
+<div class="clear"></div>

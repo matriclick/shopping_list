@@ -1,4 +1,7 @@
 ShoppingCart::Application.routes.draw do
+  resources :chef_profiles
+
+
   resources :meals
   resources :ingredient_categories
 

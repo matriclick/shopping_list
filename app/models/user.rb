@@ -1,10 +1,13 @@
 class User < ActiveRecord::Base
   after_create :create_user_preference
   
+  has_one :chef_profile
+  has_one :user_preference
+  
   has_many :menus
   has_many :shopping_lists
+  has_many :recipes
   
-  has_one :user_preference
   has_and_belongs_to_many :tags
   
   # Include default devise modules. Others available are:
@@ -16,6 +19,16 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :remember_me, :tag_ids, :name
   # attr_accessible :title, :body, :password_confirmation
+  
+  def get_chef_profile
+    if !self.chef_profile.nil?
+      return self.chef_profile 
+    else
+      self.chef_profile = ChefProfile.create(:user_id => self.id)
+      self.save
+      return self.chef_profile
+    end 
+  end
   
   def get_last_menu
     menu = self.menus.last

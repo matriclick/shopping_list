@@ -1,0 +1,27 @@
+<h1>Listing chef_profiles</h1>
+
+<table>
+  <tr>
+	<th></th>
+    <th>Introduction</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @chef_profiles.each do |chef_profile| %>
+  <tr>
+	<td><%= image_tag chef_profile.avatar.url(:thumb) %></td>
+    <td><%= chef_profile.introduction %></td>
+    <td><%= chef_profile.user_id %></td>
+    <td><%= link_to 'Show', chef_profile %></td>
+    <td><%= link_to 'Edit', edit_chef_profile_path(chef_profile) %></td>
+    <td><%= link_to 'Destroy', chef_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Chef profile', new_chef_profile_path %>
