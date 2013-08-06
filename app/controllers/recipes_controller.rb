@@ -5,10 +5,16 @@ class RecipesController < ApplicationController
   def search
     @search_term = params[:q]
     
-    @tag_names = params[:recipe][:tag_names] || Array.new
-    @meal_names = params[:recipe][:meal_names] || Array.new
-    @ingredient_names = params[:recipe][:ingredient_names] || Array.new
-    
+    unless params[:recipe].nil?
+      @tag_names = params[:recipe][:tag_names] || Array.new
+      @meal_names = params[:recipe][:meal_names] || Array.new
+      @ingredient_names = params[:recipe][:ingredient_names] || Array.new
+    else
+      @tag_names = Array.new
+      @meal_names = Array.new
+      @ingredient_names = Array.new
+    end
+  
     if !@search_term.nil?
       @recipes = Recipe.search(@search_term)
     elsif !@tag_names.nil? or !@meal_names.nil? or !@ingredient_names.nil?
