@@ -4,10 +4,18 @@ class RecipesController < ApplicationController
   
   def search
     @search_term = params[:q]
-    unless @search_term.nil?
+    
+    @tag_names = params[:recipe][:tag_names] || Array.new
+    @meal_names = params[:recipe][:meal_names] || Array.new
+    @ingredient_names = params[:recipe][:ingredient_names] || Array.new
+    
+    if !@search_term.nil?
       @recipes = Recipe.search(@search_term)
+    elsif !@tag_names.nil? or !@meal_names.nil? or !@ingredient_names.nil?
+      @recipes = Recipe.search_and(@tag_names, @meal_names, @ingredient_names)
     else
-      redirect_to home_user_home_path
+      @recipes = Recipe.all.order('created_at DESC').limit 19
+      @search_term = ''
     end
   end
   

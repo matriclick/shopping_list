@@ -78,6 +78,33 @@ class Recipe < ActiveRecord::Base
     end
   end
     
+  def self.search_and(tag_names, meal_names, ingredient_names)
+    query = ''
+    tag_names.each_with_index do |k, i|
+      if i == 0
+        query = '(tags.name = "'+k+'")'
+      else
+        query = '(tags.name = "'+k+'") or '+query
+      end
+    end
+    
+    meal_names.each_with_index do |k, i|
+      if i == 0 and tag_names.size == 0
+        query = '(meals.name = "'+k+'")'
+      else
+        query = '(meals.name = "'+k+'") or '+query
+      end
+    end
+    ingredient_names.each_with_index do |k, i|
+      if i == 0 and tag_names.size == 0 and meal_names.size == 0
+        query = '(ingredients.name = "'+k+'")'
+      else
+        query = '(ingredients.name = "'+k+'") or '+query
+      end
+    end
+    return self.joins(:ingredients).joins(:tags).joins(:meals).where(query).uniq  
+  end
+    
   def recipe_images_without_first
   end
   

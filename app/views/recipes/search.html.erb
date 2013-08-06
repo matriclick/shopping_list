@@ -1,16 +1,68 @@
-<% @recipes.each do |r| %>
-	<div style="float:left; margin:10px; background:#f6f6f6">
-		<%= link_to image_tag(r.recipe_images.first.image, width: '180px', height: '180px'), r %><br />
-		<p style="text-align:center;">
-			<%= link_to r.name, r %><br />
-			<% r.meals.each do |meal| %>
-				| <em><%= meal.name %></em> | 
-			<% end %>
-			<br />
-			<% r.get_main_ingredients.each do |ri| %>
-				<em style="font-size:10px">| <%= ri.ingredient.name %> |</em> 
-			<% end %>
-		</p>
-	</div>
-<% end %>
+<script>
+	$(function(){
+		$('input:text').each(function(){
+			var txtval = $(this).val();
+			$(this).focus(function(){
+				$(this).val('')
+				$(this).css('color', 'black')
+			});
+			$(this).blur(function(){
+				if($(this).val() == ""){
+					$(this).val(txtval);
+					$(this).css('color', '#bbb')
+				}
+			});
+		});
+	});
+</script>
+<div style="float:right;">
+	<form action="<%= recipe_search_path %>" method="get">
+		<%= text_field_tag(:q, @search_term, id: 'src_txt', 
+			value: 'Busca recetas', rel: @search_text, class: 'rounded', style: 'width:500px; color:#bbb') %>	
+		<%= submit_tag("Buscar", :name => nil) %>
+	</form>
+</div>
+<div style="float:left; max-width:200px">
+	<form action="<%= recipe_search_path %>" method="get">
+		<%= submit_tag("Filtrar", :name => nil) %>
+		<br />
+		<b>Tipo de receta:</b>
+		<br/>
+		<% Tag.all.each do |tag| %>
+			<%= check_box_tag("recipe[tag_names][]", tag.name, (@tag_names.include? tag.name)) %>
+			<%= tag.name %><br />
+		<% end %>
+		<br/>
+		<b>Comidas:</b>
+		<br/>
+		<% Meal.all.each do |meal| %>
+			<%= check_box_tag("recipe[meal_names][]", meal.name, (@meal_names.include? meal.name)) %>
+			<%= meal.name %><br />
+		<% end %>
+		<br/>
+		<b>Ingredientes que incluye:</b>
+		<br/>
+		<% Ingredient.all.each do |ingredient| %>
+			<%= check_box_tag("recipe[ingredient_names][]", ingredient.name, (@ingredient_names.include? ingredient.name)) %>
+			<%= ingredient.name %><br />
+		<% end %>
+	</form>
+</div>
+<div style="float:left; max-width:700px">
+	<% @recipes.each do |r| %>
+		<div style="float:left; margin:10px; background:#f6f6f6">
+			<%= link_to image_tag(r.recipe_images.first.image, width: '180px', height: '180px'), r %><br />
+			<p style="text-align:center;">
+				<%= link_to r.name, r %><br />
+				<% r.meals.each do |meal| %>
+					| <em><%= meal.name %></em> | 
+				<% end %>
+				<br />
+				<% r.get_main_ingredients.each do |ri| %>
+					<em style="font-size:10px">| <%= ri.ingredient.name %> |</em> 
+				<% end %>
+			</p>
+		</div>
+	<% end %>
+</div>
 <div class="clear"></div>

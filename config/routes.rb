@@ -1,7 +1,5 @@
 ShoppingCart::Application.routes.draw do
   resources :chef_profiles
-
-
   resources :meals
   resources :ingredient_categories
 
@@ -20,6 +18,7 @@ ShoppingCart::Application.routes.draw do
     get :autocomplete_ingredient_name, :on => :collection
   end
   get 'recipes/search' => 'recipes#search', :as => 'recipe_search'
+
   resources :recipes do
     get :autocomplete_ingredient_name, :on => :collection
   end
