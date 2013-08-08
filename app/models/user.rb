@@ -47,8 +47,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  def admin?
-    return false
+  def is_admin
+    return user.role_id == 1
   end
   
   def create_user_preference

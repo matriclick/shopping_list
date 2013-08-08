@@ -30,21 +30,7 @@
 	<div class="clear"></div>
 	<h1>Ultimas recetas agregadas</h1>
 	<% @recipes.each do |r| %>
-		<div style="float:left; margin:10px; background:#f6f6f6">
-			<%= link_to image_tag(r.recipe_images.first.image.url(:small)), r %><br />
-			<p style="text-align:center;">
-				<%= link_to r.name, r %><br />
-				<% r.meals.each do |meal| %>
-					| <em><%= meal.name %></em> | 
-				<% end %>
-				<br />
-				<% r.get_main_ingredients.each do |ri| %>
-					<em style="font-size:10px">| <%= ri.ingredient.name %> |</em> 
-				<% end %>
-				<br />
-				Autor: <%= (!r.user.nil? and !r.user.chef_profile.nil?) ? link_to(r.user.name, chef_profile_path(r.user.chef_profile)) : 'Privado' %>
-			</p>
-		</div>
+		<%= render 'recipes/recipe_box', recipe: r %>
 	<% end %>
 </div>
 <div class="clear"></div>

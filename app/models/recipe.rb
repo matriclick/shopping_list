@@ -31,6 +31,14 @@ class Recipe < ActiveRecord::Base
     return self.recipe_ingredients.where(:recipe_ingredient_type_id => main_type.id)
   end
   
+  def is_of_current_user(current_user)
+    if current_user.id == self.user_id
+      return true
+    else
+      return false
+    end
+  end
+    
   def add_to_shopping_list(shopping_list)
     shopping_list.recipes << self
     self.recipe_ingredients.each do |ri|
@@ -61,9 +69,13 @@ class Recipe < ActiveRecord::Base
     end
   end
 	
-	def self.search(string_filter = nil, separator = ' ')
-    if string_filter.nil?
-      return Recipe.all
+	def self.search(string_filter = nil, user_id = false, separator = ' ')
+    if string_filter.nil? or string_filter == ''
+      if only_from_logged_user and !current_user.nil?
+        return current_user.recipes
+      else
+        return Recipe.all
+      end
     else
       keywords = string_filter.split(separator)
       query = ''
@@ -74,38 +86,46 @@ class Recipe < ActiveRecord::Base
           query = '(tags.name like "%'+k+'%" or meals.name like "%'+k+'%" or users.name like "%'+k+'%" or ingredients.name like "%'+k+'%" or recipes.name like "%'+k+'%") and '+query
         end
       end
+      if user_id
+        query = 'recipes.user_id = '+user_id.to_s+' AND '+query
+      end 
       return self.joins(:ingredients).joins(:user).joins(:tags).joins(:meals).where(query).uniq
     end
   end
     
-  def self.search_and(tag_names, meal_names, ingredient_names)
+  def self.search_and(tag_names = Array.new, meal_names = Array.new, user_id = false)
     query = ''
+    query_tags = ''
+    query_meals = ''
     tag_names.each_with_index do |k, i|
       if i == 0
-        query = '(tags.name = "'+k+'")'
+        query_tags = '(tags.name = "'+k+'")'
       else
-        query = '(tags.name = "'+k+'") or '+query
+        query_tags = '(tags.name = "'+k+'") or '+query_tags
       end
     end
     
     meal_names.each_with_index do |k, i|
-      if i == 0 and tag_names.size == 0
-        query = '(meals.name = "'+k+'")'
+      if i == 0
+        query_meals = '(meals.name = "'+k+'")'
       else
-        query = '(meals.name = "'+k+'") or '+query
+        query_meals = '(meals.name = "'+k+'") or '+query_meals
       end
     end
-    ingredient_names.each_with_index do |k, i|
-      if i == 0 and tag_names.size == 0 and meal_names.size == 0
-        query = '(ingredients.name = "'+k+'")'
-      else
-        query = '(ingredients.name = "'+k+'") or '+query
-      end
+    
+    if tag_names.size > 0 and meal_names.size > 0
+      query = '('+query_tags+') AND ('+query_meals+')'
+    elsif tag_names.size > 0 and meal_names.size == 0
+      query = '('+query_tags+')'
+    else
+      query = '('+query_meals+')'      
     end
-    return self.joins(:ingredients).joins(:tags).joins(:meals).where(query).uniq  
+    
+    if user_id 
+      query = '(recipes.user_id = '+user_id.to_s+') AND '+query
+    end
+    
+    return self.joins(:tags).joins(:meals).joins(:user).where(query).uniq  
   end
     
-  def recipe_images_without_first
-  end
-  
 end

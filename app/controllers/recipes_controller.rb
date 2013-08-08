@@ -1,28 +1,13 @@
 class RecipesController < ApplicationController
   autocomplete :ingredient, :name, :full => true
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:search, :show]
   
   def search
-    @search_term = params[:q]
-    
-    unless params[:recipe].nil?
-      @tag_names = params[:recipe][:tag_names] || Array.new
-      @meal_names = params[:recipe][:meal_names] || Array.new
-      @ingredient_names = params[:recipe][:ingredient_names] || Array.new
-    else
-      @tag_names = Array.new
-      @meal_names = Array.new
-      @ingredient_names = Array.new
-    end
+    get_recipes_from_params(params)
+  end
   
-    if !@search_term.nil?
-      @recipes = Recipe.search(@search_term)
-    elsif !@tag_names.nil? or !@meal_names.nil? or !@ingredient_names.nil?
-      @recipes = Recipe.search_and(@tag_names, @meal_names, @ingredient_names)
-    else
-      @recipes = Recipe.all.order('created_at DESC').limit 19
-      @search_term = ''
-    end
+  def my_recipes
+    get_recipes_from_params(params, current_user.id)
   end
   
   def add_recipe_to_shopping_list
@@ -116,4 +101,31 @@ class RecipesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  
+  def get_recipes_from_params(params, only_from_logged_user = false)
+    @search_term = params[:q]
+    
+    unless params[:recipe].nil?
+      @tag_names = params[:recipe][:tag_names] || Array.new
+      @meal_names = params[:recipe][:meal_names] || Array.new
+    end
+  
+    if !@search_term.nil?
+      @recipes = Recipe.search(@search_term, only_from_logged_user)
+    elsif !@tag_names.nil? or !@meal_names.nil?
+      @recipes = Recipe.search_and(@tag_names, @meal_names, only_from_logged_user)
+    else
+      if only_from_logged_user
+        @recipes = current_user.recipes
+      else
+        @recipes = Recipe.order('created_at DESC').limit 19
+      end
+      @search_term = ''
+      @tag_names = Array.new
+      @meal_names = Array.new
+    end
+  end
+
 end

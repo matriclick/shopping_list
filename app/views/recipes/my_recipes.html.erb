@@ -20,14 +20,14 @@
 </div>
 
 <div style="float:right;">
-	<form action="<%= recipe_search_path %>" method="get">
+	<form action="<%= recipe_my_recipes_path %>" method="get">
 		<%= text_field_tag(:q, @search_term, id: 'src_txt', 
 			value: 'Busca recetas', rel: @search_text, class: 'rounded', style: 'width:500px; color:#bbb') %>	
 		<%= submit_tag("Buscar", :name => nil) %>
 	</form>
 </div>
 <div style="float:left; max-width:200px">
-	<form action="<%= recipe_search_path %>" method="get">
+	<form action="<%= recipe_my_recipes_path %>" method="get">
 		<%= submit_tag("Filtrar", :name => nil) %>
 		<br />
 		<b>Tipo de receta:</b>

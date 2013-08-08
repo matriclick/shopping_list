@@ -4,7 +4,7 @@
 	<h1><%= @recipe.name %></h1>
 	<h2>Autor: <%= @recipe.user.name %></h2>
 	<p>
-	  <%= image_tag @recipe.recipe_images.first.image.url(:large) %><br />
+	  <%= image_tag @recipe.recipe_images.first.image.url(:medium) %><br />
 	  <% @recipe.recipe_images.without_cover.each do |image| %>
 		<%= image_tag image.image.url(:thumb) %>
 	  <% end %>

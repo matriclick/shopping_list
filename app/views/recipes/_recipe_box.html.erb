@@ -1,0 +1,18 @@
+<div style="float:left; margin:10px; background:#f6f6f6">
+	<%= link_to image_tag(recipe.recipe_images.first.image(:small)), recipe %><br />
+	<p style="text-align:center;">
+		<%= link_to recipe.name, recipe %><br />
+		<% recipe.meals.each do |meal| %>
+			| <em><%= meal.name %></em> | 
+		<% end %>
+		<br />
+		Autor: 
+		<%= (!recipe.user.nil? and !recipe.user.chef_profile.nil?) ? link_to(recipe.user.name, chef_profile_path(recipe.user.chef_profile)) : 'Privado' %>
+		<% if recipe.is_of_current_user(current_user) %>
+		<div style="color:white; background:black; text-align:center;">
+			<%= link_to 'Editar', edit_recipe_path(recipe) %> | 
+			<%= link_to 'Eliminar', recipe, method: :delete, data: { confirm: '¿Estás seguro?' } %>
+		</div>
+		<% end %>
+	</p>
+</div>
