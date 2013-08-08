@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :remember_me, :tag_ids, :name
   # attr_accessible :title, :body, :password_confirmation
   
+  def chef_name
+    return self.get_chef_profile.chef_name
+  end
+  
   def get_chef_profile
     if !self.chef_profile.nil?
       return self.chef_profile 
