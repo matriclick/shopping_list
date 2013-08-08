@@ -6,8 +6,8 @@
 		<div class="user_nav right" style="text-align:right; font-size:11px">
 			<div>
 				<% if user_signed_in? %>
-				  Hola <%= current_user.name %>! |
-  				  <%= link_to "Ver Perfil", chef_profile_path(current_user.get_chef_profile) %> | 
+				  Hola <%= link_to current_user.name, edit_user_registration_path(current_user) %>! |
+  				  <%= link_to "Perfil de Chef", chef_profile_path(current_user.get_chef_profile) %> | 
 				  <%= link_to "Salir", destroy_user_session_path, :method => :delete %>
 				<% else %>
 				  <%= link_to "Entrar", new_user_session_path %> | <%= link_to "Registrarse", new_user_registration_path %>
