@@ -7,7 +7,7 @@
 		<% end %>
 		<br />
 		Autor: 
-		<%= (!recipe.user.nil? and !recipe.user.chef_profile.nil?) ? link_to(recipe.user.name, chef_profile_path(recipe.user.chef_profile)) : 'Privado' %>
+		<%= (!recipe.user.nil? and !recipe.user.chef_profile.nil?) ? link_to(recipe.chef_profile.name, chef_profile_path(recipe.user.chef_profile)) : 'Privado' %>
 		<% if recipe.is_of_current_user(current_user) %>
 		<div style="color:white; background:black; text-align:center;">
 			<%= link_to 'Editar', edit_recipe_path(recipe) %> | 
