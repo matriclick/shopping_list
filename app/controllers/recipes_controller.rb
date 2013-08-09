@@ -129,15 +129,17 @@ class RecipesController < ApplicationController
   
   def get_recipes_from_params(params, only_from_logged_user = false)
     @search_term = params[:q]
+    @tag_names = Array.new
+    @meal_names = Array.new
     
     unless params[:recipe].nil?
-      @tag_names = params[:recipe][:tag_names] || Array.new
-      @meal_names = params[:recipe][:meal_names] || Array.new
+      @tag_names = params[:recipe][:tag_names]
+      @meal_names = params[:recipe][:meal_names]
     end
   
     if !@search_term.nil?
       @recipes = Recipe.search(@search_term, only_from_logged_user)
-    elsif !@tag_names.nil? or !@meal_names.nil?
+    elsif @tag_names.size > 0 or @meal_names.size > 0
       @recipes = Recipe.search_and(@tag_names, @meal_names, only_from_logged_user)
     else
       if only_from_logged_user
@@ -146,8 +148,6 @@ class RecipesController < ApplicationController
         @recipes = Recipe.order('created_at DESC').limit 19
       end
       @search_term = ''
-      @tag_names = Array.new
-      @meal_names = Array.new
     end
   end
 
