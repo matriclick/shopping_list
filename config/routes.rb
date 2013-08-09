@@ -29,7 +29,9 @@ ShoppingCart::Application.routes.draw do
   end
 
   get 'add_recipe_to_shopping_list/:id' => 'recipes#add_recipe_to_shopping_list', :as => 'add_recipe_to_shopping_list'
-  
+  get 'remove_recipe_from_shopping_list/:id' => 'recipes#remove_recipe_from_shopping_list', :as => 'remove_recipe_from_shopping_list'
+  get 'clear_list' => 'recipes#clear_list', :as => 'clear_list'
+      
   resources :tags
   get "assign-tag-to-user" => 'tags#assign_to_user', :as => 'tags_assign_to_user'
   put "update-tags-for-user" => "tags#update_tags_for_user", :as => 'update_tags_for_user'

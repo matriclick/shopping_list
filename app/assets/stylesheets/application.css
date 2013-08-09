@@ -52,7 +52,7 @@ h2 {
 	clear:both;
 }
 li {
-	list-style:none;
+	margin-bottom:5px;
 }
 .content {
 	width:900px;

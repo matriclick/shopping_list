@@ -41,6 +41,7 @@ class Recipe < ActiveRecord::Base
     
   def add_to_shopping_list(shopping_list)
     shopping_list.recipes << self
+
     self.recipe_ingredients.each do |ri|
       exists = false
       shopping_list.shopping_list_items.each do |sli|
@@ -58,17 +59,31 @@ class Recipe < ActiveRecord::Base
       end
       
       if !exists
-        sli = ShoppingListItem.new
-        sli.ingredient = ri.ingredient
-        sli.quantity = ri.quantity
-        sli.measure = ri.measure
-        sli.save
+        sli = ShoppingListItem.create(:ingredient_id => ri.ingredient.id, :quantity => ri.quantity, :measure_id => ri.measure)
         shopping_list.shopping_list_items << sli
         shopping_list.save
       end
     end
   end
 	
+	def remove_from_shopping_list(shopping_list)
+	  shopping_list.recipes.delete(self)
+	  self.recipe_ingredients.each do |ri|
+      shopping_list.shopping_list_items.each do |sli|
+        if sli.ingredient == ri.ingredient
+          if sli.measure == ri.measure
+            sli.quantity = sli.quantity - ri.quantity
+          else
+            #TODO Por completar realizar conversión
+            sli.quantity = sli.quantity - ri.quantity
+          end
+          sli.save
+          break
+        end
+      end
+    end
+  end
+  
 	def self.search(string_filter = nil, user_id = false, separator = ' ')
     if string_filter.nil? or string_filter == ''
       if only_from_logged_user and !current_user.nil?

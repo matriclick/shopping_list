@@ -1,3 +1,29 @@
-<% @shopping_list.shopping_list_items.each do |sli| %>
-	- <%= sli.quantity %> <%= sli.measure.name %> de <%= sli.ingredient.name %><br /><br />
-<% end %>
+<h1>Lista de Compras</h1>
+<div>
+	<ul>
+	<% @shopping_list.shopping_list_items.each do |sli| %>
+		<li><%= sli.quantity %> <%= sli.measure.name if !sli.measure.nil? %> de <%= sli.ingredient.name %></li>
+	<% end %>
+	<%= link_to '(borrar lista)', clear_list_path %>
+	<ul>
+</div>
+<h2>Recetas consideradas para realizar la lista de compras</h2>
+<div>
+	<div style="float:left;">
+		<% @shopping_list.recipes.each do |recipe| %>
+			<div style="float:left; margin:10px; background:#f6f6f6">
+				<%= link_to image_tag(recipe.recipe_images.first.image(:small)), recipe %><br />
+				<p style="text-align:center;">
+					<%= link_to recipe.name, recipe %><br />
+					<br />
+					Autor: 
+					<%= (!recipe.user.nil? and !recipe.user.chef_profile.nil?) ? link_to(recipe.user.chef_name, chef_profile_path(recipe.user.chef_profile)) : 'Privado' %>
+					<div style="color:white; background:black; text-align:center;">
+						<%= link_to 'Eliminar de la lista de compras', remove_recipe_from_shopping_list_path(recipe) %>
+					</div>
+				</p>
+			</div>
+		<% end %>
+	</div>
+</div>
+<div class="clear"></div>

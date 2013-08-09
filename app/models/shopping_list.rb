@@ -9,4 +9,9 @@ class ShoppingList < ActiveRecord::Base
   def number_of_items
     self.shopping_list_items.size
   end
+  
+  def clear_list
+    self.recipes.delete_all
+    self.shopping_list_items.delete_all
+  end
 end

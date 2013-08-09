@@ -15,11 +15,11 @@
 		});
 	});
 </script>
-<div>
+<div style="position:absolute; top:5px; left:20px;">
 	<%= link_to 'AGREGAR RECETAS', new_recipe_path %>
 </div>
 
-<div style="float:right;">
+<div style="position:absolute; top:5px; right:0%;">
 	<form action="<%= recipe_my_recipes_path %>" method="get">
 		<%= text_field_tag(:q, @search_term, id: 'src_txt', 
 			value: 'Busca recetas', rel: @search_text, class: 'rounded', style: 'width:500px; color:#bbb') %>	
@@ -45,9 +45,19 @@
 		<% end %>
 	</form>
 </div>
-<div style="float:left; max-width:630px">
-	<% @recipes.each do |r| %>
-		<%= render 'recipe_box', recipe: r %>
-	<% end %>
+<div style="max-width:650px; float:left; margin-left:10px">
+	<h2>Mis recetas</h2>
+	<div style="float:left;">
+		<% @recipes.each do |r| %>
+			<%= render 'recipe_box', recipe: r %>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<h2>Mis favoritas</h2>
+	<div style="float:left;">
+		<% @recipes.each do |r| %>
+			<%= render 'recipe_box', recipe: r %>
+		<% end %>
+	</div>
 </div>
 <div class="clear"></div>

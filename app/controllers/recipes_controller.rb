@@ -28,6 +28,17 @@ class RecipesController < ApplicationController
     redirect_to home_shopping_list_path
   end
   
+  def remove_recipe_from_shopping_list
+    @recipe = Recipe.find(params[:id])
+    @recipe.remove_from_shopping_list(current_user.get_current_shopping_list)
+    redirect_to home_shopping_list_path
+  end
+  
+  def clear_list
+    current_user.get_current_shopping_list.clear_list
+    redirect_to home_shopping_list_path
+  end
+  
   # GET /recipes
   # GET /recipes.json
   def index
