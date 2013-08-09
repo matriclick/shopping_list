@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one :chef_profile
   has_one :user_preference
   
+  has_many :user_favorites
   has_many :menus
   has_many :shopping_lists
   has_many :recipes
@@ -19,6 +20,18 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :remember_me, :tag_ids, :name
   # attr_accessible :title, :body, :password_confirmation
+  
+  def add_recipe_to_favorites(recipe)
+    UserFavorite.find_or_create_by_recipe_id_and_user_id(:recipe_id => recipe.id, :user_id => self.id)
+  end
+  
+  def remove_recipe_from_favorites(recipe)
+    UserFavorite.where(:recipe_id => recipe.id, :user_id => self.id).destroy_all
+  end
+  
+  def is_favorite(recipe)
+    return UserFavorite.where(:recipe_id => recipe.id, :user_id => self.id).size > 0
+  end
   
   def chef_name
     return self.get_chef_profile.chef_name

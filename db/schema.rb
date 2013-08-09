@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130805195916) do
+ActiveRecord::Schema.define(:version => 20130809001207) do
 
   create_table "chef_profiles", :force => true do |t|
     t.text     "introduction"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(:version => 20130805195916) do
   end
 
   add_index "chef_profiles", ["slug"], :name => "index_chef_profiles_on_slug", :unique => true
+
+  create_table "favorite_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "ingredient_categories", :force => true do |t|
     t.string   "name"
@@ -230,6 +237,14 @@ ActiveRecord::Schema.define(:version => 20130805195916) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_favorites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.integer  "favorite_type_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "user_preferences", :force => true do |t|

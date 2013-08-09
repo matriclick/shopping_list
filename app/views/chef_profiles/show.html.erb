@@ -14,8 +14,18 @@
 	<h2>Recetas agregadas</h2>
 	<% @chef_profile.user.recipes.each do |recipe| %>
 		<div style="float:left; margin:10px;">
-			<%= recipe.name %><br />
-			<%= image_tag recipe.recipe_images.first.image.url(:thumb) %>
+			<%= link_to recipe.name, recipe %><br />
+			<%= link_to image_tag(recipe.recipe_images.first.image.url(:thumb)), recipe %>
+		</div>
+	<% end %>
+</div>
+<div class="clear"></div>
+<div>
+	<h2>Recetas favoritas de <%= @chef_profile.chef_name %></h2>
+	<% @chef_profile.user.user_favorites.each do |favorite| %>
+		<div style="float:left; margin:10px;">
+			<%= link_to favorite.recipe.name, favorite.recipe %><br />
+			<%= link_to image_tag(favorite.recipe.recipe_images.first.image.url(:thumb)), favorite.recipe %>
 		</div>
 	<% end %>
 </div>

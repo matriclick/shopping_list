@@ -2,6 +2,18 @@ class RecipesController < ApplicationController
   autocomplete :ingredient, :name, :full => true
   before_filter :authenticate_user!, :except => [:search, :show]
   
+  def remove_from_favorite
+    @recipe = Recipe.find(params[:id])
+    current_user.remove_recipe_from_favorites(@recipe)   
+    redirect_to @recipe 
+  end
+  
+  def add_to_favorite
+    @recipe = Recipe.find(params[:id])
+    current_user.add_recipe_to_favorites(@recipe)
+    redirect_to @recipe
+  end
+  
   def search
     get_recipes_from_params(params)
   end

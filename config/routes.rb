@@ -14,12 +14,16 @@ ShoppingCart::Application.routes.draw do
   get 'send_shopping_list' => 'menus#send_shopping_list', :as => 'send_shopping_list'
   
   devise_for :users
+  
   resources :ingredients do 
     get :autocomplete_ingredient_name, :on => :collection
   end
   
   get 'recipes/mine' => 'recipes#my_recipes', :as => 'recipe_my_recipes'
   get 'recipes/search' => 'recipes#search', :as => 'recipe_search'
+  get 'recipe/add-to-favorite/:id' => 'recipes#add_to_favorite', :as => 'recipe_add_to_favorite'
+  get 'recipe/remove-from-favorite/:id' => 'recipes#remove_from_favorite', :as => 'recipe_remove_from_favorite'
+   
   resources :recipes do
     get :autocomplete_ingredient_name, :on => :collection
   end

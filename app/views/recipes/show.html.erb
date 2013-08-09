@@ -2,7 +2,7 @@
 
 <div style="float:left">
 	<h1><%= @recipe.name %></h1>
-	<h2>Autor: <%= @recipe.user.name %></h2>
+	<h2>Autor: <%= link_to @recipe.user.chef_name, @recipe.user.chef_profile %></h2>
 	<p>
 	  <%= image_tag @recipe.recipe_images.first.image.url(:medium) %><br />
 	  <% @recipe.recipe_images.without_cover.each do |image| %>
@@ -14,6 +14,13 @@
 	</p>
 	<p>
 		<%= link_to '(Agregar ingredientes a la lista de compras)', add_recipe_to_shopping_list_path(:id => @recipe.id) %>
+	</p>
+	<p>
+		<% if user_signed_in? and current_user.is_favorite(@recipe) %>
+			Receta Favorita <%= link_to '¿Eliminar de favoritos?', recipe_remove_from_favorite_path(:id => @recipe.id) %>
+		<% else %>
+			<%= link_to '(Marcar como Favorito)', recipe_add_to_favorite_path(:id => @recipe.id) %>
+		<% end %>
 	</p>
 	<p>
 		<%= link_to 'Volver al menú', show_menu_for_user_path %> | 

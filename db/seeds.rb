@@ -74,3 +74,9 @@ aux << (Ingredient.find_by_name("Hamburguesa") || Ingredient.create(:name => 'Ha
 aux << (Ingredient.find_by_name("Arroz") || Ingredient.create(:name => 'Arroz', :price => 1000, :quantity_for_price => 1))
 aux.each { |x| puts x.name}
 puts "\n"
+
+puts "--> FavoriteType:"
+aux = []
+aux << (FavoriteType.find_by_name("Favorito") || FavoriteType.create(:name => 'Favorito'))
+aux.each { |x| puts x.name}
+puts "\n"
