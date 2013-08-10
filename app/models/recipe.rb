@@ -32,7 +32,7 @@ class Recipe < ActiveRecord::Base
   end
   
   def is_of_current_user(current_user)
-    if current_user.id == self.user_id
+    if !current_user.nil? and current_user.id == self.user_id
       return true
     else
       return false
@@ -58,8 +58,8 @@ class Recipe < ActiveRecord::Base
         end
       end
       
-      if !exists
-        sli = ShoppingListItem.create(:ingredient_id => ri.ingredient.id, :quantity => ri.quantity, :measure_id => ri.measure)
+      if !exists and !ri.ingredient.nil? and !ri.measure.nil?
+        sli = ShoppingListItem.create(:ingredient_id => ri.ingredient.id, :quantity => ri.quantity, :measure_id => ri.measure.id)
         shopping_list.shopping_list_items << sli
         shopping_list.save
       end
