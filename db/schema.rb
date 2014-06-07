@@ -233,12 +233,6 @@ ActiveRecord::Schema.define(:version => 20130809001207) do
     t.integer "tag_id"
   end
 
-  create_table "user_added_ingredients", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "user_favorites", :force => true do |t|
     t.integer  "user_id"
     t.integer  "recipe_id"
